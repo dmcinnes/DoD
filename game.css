@@ -12,12 +12,30 @@
   border-radius: 44px;
 }
 
-.card.power.agl-5 {
+.card.power {
   background-image: url(cards/power.png);
-  background-position: -48px 0px;
 }
 
-.card.power.int-1 {
-  background-image: url(cards/power.png);
-  background-position: -442px 0px;
-}
+.card.power.agl-5  { background-position: -48px      0px; }
+.card.power.int-1  { background-position: -442px     0px; }
+.card.power.int-2  { background-position: -836px     0px; }
+
+.card.power.int-3  { background-position: -48px   -551px; }
+.card.power.int-4  { background-position: -442px  -551px; }
+.card.power.int-5  { background-position: -836px  -551px; }
+
+.card.power.move-1 { background-position: -48px  -1102px; }
+.card.power.move-2 { background-position: -442px -1102px; }
+.card.power.move-3 { background-position: -836px -1102px; }
+
+.card.power.str-1  { background-position: -48px  -1653px; }
+.card.power.str-2  { background-position: -442px -1653px; }
+.card.power.str-3  { background-position: -836px -1653px; }
+
+.card.power.str-4  { background-position: -48px  -2204px; }
+.card.power.str-5  { background-position: -442px -2204px; }
+.card.power.agl-1  { background-position: -836px -2204px; }
+
+.card.power.agl-2  { background-position: -48px  -2755px; }
+.card.power.agl-3  { background-position: -442px -2755px; }
+.card.power.agl-4  { background-position: -836px -2755px; }
