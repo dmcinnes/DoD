@@ -4,6 +4,7 @@
 }
 
 .card {
+  transform-style: preserve-3d;
   display: inline-block;
   position: relative;
   background: red;
@@ -17,10 +18,26 @@
   margin-right: -312px;
   margin-bottom: -438px;
   z-index: 0;
+  backface-visibility: hidden;
+}
+
+.card:after {
+  content: '';
+  border-radius: 44px;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  left: 0px;
+  position: absolute;
+  transform: rotateY( 180deg );
+  backface-visibility: hidden;
+}
+
+.card.face-down {
+  transform: translate(-40%, -40%) scale(0.2, 0.2) rotateY( 180deg );
 }
 
 .card.selected {
-  /* position: absolute; */
   transition: 0.05s ease-out;
   transform: translate(0, 0) scale(1.0, 1.0);
   z-index: 100;
@@ -28,6 +45,9 @@
 
 .card.power {
   background-image: url(cards/power.png);
+}
+.card.power:after {
+  background-image: url(cards/power-back.png);
 }
 
 .card.power.agl-5  { background-position: -48px      0px; }
