@@ -1,0 +1,23 @@
+#game {
+  background: blue;
+}
+
+.card {
+  display: inline-block;
+  background: red;
+  width: 390px;
+  height: 548px;
+  color: white;
+  box-shadow: 5px 5px 9px rgba(0,0,0,0.3);
+  border-radius: 44px;
+}
+
+.card.power.agl-5 {
+  background-image: url(cards/power.png);
+  background-position: -48px 0px;
+}
+
+.card.power.int-1 {
+  background-image: url(cards/power.png);
+  background-position: -442px 0px;
+}
