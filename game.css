@@ -17,7 +17,6 @@ body {
   background-color: black;
   width: 78px;
   height: 110px;
-  color: white;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   border-radius: 9px;
   /* so the back will show when flipped */
@@ -81,8 +80,22 @@ body {
   transform: rotateY( 180deg );
 }
 
-.stack-hover {
-  background-color: red;
+.stack.stack-hover {
+  border: solid yellow 3px;
+}
+
+.stack.wide {
+  /* so we can explictly control the inline-block card margins */
+  font-size: 0;
+  width: 729px;
+}
+.stack.wide .card {
+  display: inline-block;
+  margin-right: 3px;
+}
+
+.stack.wide .card:last-child {
+  margin-right: 0px;
 }
 
 .card.power.agl-5  { background-position: -10px      0px; }
