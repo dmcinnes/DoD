@@ -50,6 +50,28 @@
   background-image: url(cards/power-back.png);
 }
 
+.stack {
+  display: inline-block;
+  width: 79px;
+  height: 110px;
+  border-radius: 9px;
+  border: solid black 3px;
+  margin: 5px;
+  padding: 2px;
+}
+
+.stack .card {
+  display: none;
+}
+
+.stack .card:first-child {
+  display: block;
+}
+
+.stack.face-down .card:first-child {
+  transform: translate(-40%, -40%) scale(0.2, 0.2) rotateY( 180deg );
+}
+
 .card.power.agl-5  { background-position: -48px      0px; }
 .card.power.int-1  { background-position: -442px     0px; }
 .card.power.int-2  { background-position: -836px     0px; }
