@@ -7,9 +7,13 @@ $(function () {
   });
   game.find('.stack').droppable({
     hoverClass: 'stack-hover',
-    drop: function (event) {
-      console.log(event);
-      console.log(this);
+    drop: function (event, ui) {
+      console.log(ui);
+      // move to the new stack
+      var card = $(ui.draggable).detach();
+      // so it doesn't 'revert' after being added to this stack
+      card.css({left: 0, top: 0});
+      $(this).prepend(card);
     }
   });
 
