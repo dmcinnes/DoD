@@ -84,17 +84,17 @@ body {
   border: solid yellow 3px;
 }
 
-.stack.wide {
+.stack.player-hand {
   /* so we can explictly control the inline-block card margins */
   font-size: 0;
   width: 729px;
 }
-.stack.wide .card {
+.stack.player-hand .card {
   display: inline-block;
   margin-right: 3px;
 }
 
-.stack.wide .card:last-child {
+.stack.player-hand .card:last-child {
   margin-right: 0px;
 }
 

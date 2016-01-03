@@ -4,21 +4,21 @@ $(function () {
 
   game.find('.card').draggable({
     revert: true,
-    connectToSortable: ".stack.wide"
+    revertDuration: 0,
+    connectToSortable: ".stack.player-hand"
   });
-  game.find('.stack').droppable({
+  game.find('.stack:not(.player-hand)').droppable({
     hoverClass: 'stack-hover',
     drop: function (event, ui) {
       // move to the new stack
-      var card = $(ui.draggable).detach();
-      // so it doesn't 'revert' after being added to a non-sortable stack
-      if (card.css('position') == 'relative') {
-        card.css({left: 0, top: 0});
-      }
-      $(this).prepend(card);
+      var stack = $(this);
+      setTimeout(function () {
+        var card = $(ui.draggable).detach();
+        stack.prepend(card);
+      }, 0);
     }
   });
-  game.find('.stack.wide').sortable({
+  game.find('.stack.player-hand').sortable({
   });
 
   game.on('click', '.card', function (event) {
