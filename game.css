@@ -77,7 +77,7 @@ body {
 }
 
 .stack.face-down .card:first-child {
-  transform: rotateY( 180deg );
+  transform: rotateY(180deg);
 }
 
 .stack.stack-hover {
@@ -98,26 +98,26 @@ body {
   margin-right: 0px;
 }
 
-.card.power.agl-5  { background-position: -10px      0px; }
+.card.power.agl-5  { background-position: -10px     0px; }
 .card.power.int-1  { background-position: -90px     0px; }
-.card.power.int-2  { background-position: -170px     0px; }
+.card.power.int-2  { background-position: -170px    0px; }
 
-.card.power.int-3  { background-position: -10px   -112px; }
+.card.power.int-3  { background-position: -10px  -112px; }
 .card.power.int-4  { background-position: -90px  -112px; }
-.card.power.int-5  { background-position: -170px  -112px; }
+.card.power.int-5  { background-position: -170px -112px; }
 
 .card.power.move-1 { background-position: -10px  -223px; }
-.card.power.move-2 { background-position: -90px -223px; }
+.card.power.move-2 { background-position: -90px  -223px; }
 .card.power.move-3 { background-position: -170px -223px; }
 
 .card.power.str-1  { background-position: -10px  -334px; }
-.card.power.str-2  { background-position: -90px -334px; }
+.card.power.str-2  { background-position: -90px  -334px; }
 .card.power.str-3  { background-position: -170px -334px; }
 
 .card.power.str-4  { background-position: -10px  -446px; }
-.card.power.str-5  { background-position: -90px -446px; }
+.card.power.str-5  { background-position: -90px  -446px; }
 .card.power.agl-1  { background-position: -170px -446px; }
 
 .card.power.agl-2  { background-position: -10px  -557px; }
-.card.power.agl-3  { background-position: -90px -557px; }
+.card.power.agl-3  { background-position: -90px  -557px; }
 .card.power.agl-4  { background-position: -170px -557px; }
