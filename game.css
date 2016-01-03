@@ -34,6 +34,7 @@
   position: absolute;
   transform: rotateY( 180deg );
   backface-visibility: hidden;
+  background-size: 101%;
 }
 
 .card.face-down {
