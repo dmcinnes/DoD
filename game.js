@@ -2,11 +2,14 @@ $(function () {
 
   var game = $('#game');
 
-  game.find('.card').draggable();
+  game.find('.card').draggable({
+    revert: true
+  });
   game.find('.stack').droppable({
     hoverClass: 'stack-hover',
-    drop: function () {
-      console.log('dorp');
+    drop: function (event) {
+      console.log(event);
+      console.log(this);
     }
   });
 

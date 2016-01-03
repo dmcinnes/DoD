@@ -10,30 +10,25 @@
   background: red;
   width: 78px;
   height: 110px;
-  /* width: 390px; */
-  /* height: 548px; */
   color: white;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   border-radius: 9px;
-  /* transform: translate(-40%, -40%) scale(0.2, 0.2); */
+  /* so the back will show when flipped */
+  transform: translateZ(1px);
   transition: 0.05s ease-out;
-  /* margin-right: -312px; */
-  /* margin-bottom: -438px; */
   z-index: 0;
-  backface-visibility: hidden;
   background-size: 330%;
 }
 
 .card:after {
   content: '';
+  position: absolute;
   border-radius: 9px;
   right: 0px;
   bottom: 0px;
   top: 0px;
   left: 0px;
-  position: absolute;
   transform: rotateY( 180deg );
-  backface-visibility: hidden;
   background-size: 101%;
 }
 
@@ -43,7 +38,7 @@
 
 .card.selected {
   transition: 0.05s ease-out;
-  transform: translate(0, 0) scale(5.0, 5.0);
+  transform: translate(300px, 300px) scale(5.0, 5.0);
   z-index: 100;
 }
 
