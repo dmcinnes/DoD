@@ -8,22 +8,25 @@
   display: inline-block;
   position: relative;
   background: red;
-  width: 390px;
-  height: 548px;
+  width: 78px;
+  height: 110px;
+  /* width: 390px; */
+  /* height: 548px; */
   color: white;
-  box-shadow: 5px 5px 9px rgba(0,0,0,0.3);
-  border-radius: 44px;
-  transform: translate(-40%, -40%) scale(0.2, 0.2);
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  border-radius: 9px;
+  /* transform: translate(-40%, -40%) scale(0.2, 0.2); */
   transition: 0.05s ease-out;
-  margin-right: -312px;
-  margin-bottom: -438px;
+  /* margin-right: -312px; */
+  /* margin-bottom: -438px; */
   z-index: 0;
   backface-visibility: hidden;
+  background-size: 330%;
 }
 
 .card:after {
   content: '';
-  border-radius: 44px;
+  border-radius: 9px;
   right: 0px;
   bottom: 0px;
   top: 0px;
@@ -34,12 +37,12 @@
 }
 
 .card.face-down {
-  transform: translate(-40%, -40%) scale(0.2, 0.2) rotateY( 180deg );
+  transform: rotateY( 180deg );
 }
 
 .card.selected {
   transition: 0.05s ease-out;
-  transform: translate(0, 0) scale(1.0, 1.0);
+  transform: translate(0, 0) scale(5.0, 5.0);
   z-index: 100;
 }
 
@@ -69,29 +72,33 @@
 }
 
 .stack.face-down .card:first-child {
-  transform: translate(-40%, -40%) scale(0.2, 0.2) rotateY( 180deg );
+  transform: rotateY( 180deg );
 }
 
-.card.power.agl-5  { background-position: -48px      0px; }
-.card.power.int-1  { background-position: -442px     0px; }
-.card.power.int-2  { background-position: -836px     0px; }
+.stack-hover {
+  background-color: red;
+}
 
-.card.power.int-3  { background-position: -48px   -551px; }
-.card.power.int-4  { background-position: -442px  -551px; }
-.card.power.int-5  { background-position: -836px  -551px; }
+.card.power.agl-5  { background-position: -10px      0px; }
+.card.power.int-1  { background-position: -90px     0px; }
+.card.power.int-2  { background-position: -170px     0px; }
 
-.card.power.move-1 { background-position: -48px  -1102px; }
-.card.power.move-2 { background-position: -442px -1102px; }
-.card.power.move-3 { background-position: -836px -1102px; }
+.card.power.int-3  { background-position: -10px   -112px; }
+.card.power.int-4  { background-position: -90px  -112px; }
+.card.power.int-5  { background-position: -170px  -112px; }
 
-.card.power.str-1  { background-position: -48px  -1653px; }
-.card.power.str-2  { background-position: -442px -1653px; }
-.card.power.str-3  { background-position: -836px -1653px; }
+.card.power.move-1 { background-position: -10px  -223px; }
+.card.power.move-2 { background-position: -90px -223px; }
+.card.power.move-3 { background-position: -170px -223px; }
 
-.card.power.str-4  { background-position: -48px  -2204px; }
-.card.power.str-5  { background-position: -442px -2204px; }
-.card.power.agl-1  { background-position: -836px -2204px; }
+.card.power.str-1  { background-position: -10px  -334px; }
+.card.power.str-2  { background-position: -90px -334px; }
+.card.power.str-3  { background-position: -170px -334px; }
 
-.card.power.agl-2  { background-position: -48px  -2755px; }
-.card.power.agl-3  { background-position: -442px -2755px; }
-.card.power.agl-4  { background-position: -836px -2755px; }
+.card.power.str-4  { background-position: -10px  -446px; }
+.card.power.str-5  { background-position: -90px -446px; }
+.card.power.agl-1  { background-position: -170px -446px; }
+
+.card.power.agl-2  { background-position: -10px  -557px; }
+.card.power.agl-3  { background-position: -90px -557px; }
+.card.power.agl-4  { background-position: -170px -557px; }

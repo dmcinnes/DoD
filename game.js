@@ -2,6 +2,14 @@ $(function () {
 
   var game = $('#game');
 
+  game.find('.card').draggable();
+  game.find('.stack').droppable({
+    hoverClass: 'stack-hover',
+    drop: function () {
+      console.log('dorp');
+    }
+  });
+
   game.on('click', '.card', function (event) {
     var card = $(this);
     var selected = $(this).hasClass('selected');
