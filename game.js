@@ -5,21 +5,31 @@ $(function () {
   game.find('.card').draggable({
     revert: true,
     revertDuration: 0,
-    connectToSortable: ".stack.player-hand"
+    containment: 'window',
+    appendTo: document.body,
+    helper: 'clone'
   });
-  game.find('.stack:not(.player-hand)').droppable({
+  game.find('.stack').droppable({
     hoverClass: 'stack-hover',
     drop: function (event, ui) {
+      // re-enable single from stack
+      var from = $(ui.draggable).parent('.stack');
+      if (from.hasClass('single')) {
+        from.droppable('enable');
+      }
       // move to the new stack
       var stack = $(this);
       setTimeout(function () {
         var card = $(ui.draggable).detach();
         stack.prepend(card);
       }, 0);
+      // disable this stack if it's a single
+      if (stack.hasClass('single')) {
+        stack.droppable('disable');
+      }
     }
   });
-  game.find('.stack.player-hand').sortable({
-  });
+  // game.find('.stack.single').droppable({
 
   game.on('click', '.card', function (event) {
     var card = $(this);
