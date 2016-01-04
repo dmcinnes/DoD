@@ -29,7 +29,8 @@ $(function () {
       }
     }
   });
-  // game.find('.stack.single').droppable({
+  // disable all single stacks that have a card in them
+  game.find('.stack.single:has(.card)').droppable('disable');
 
   game.on('click', '.card', function (event) {
     var card = $(this);
