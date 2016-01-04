@@ -84,21 +84,6 @@ body {
   border: solid yellow 3px;
 }
 
-.stack.player-hand {
-  /* so we can explictly control the inline-block card margins */
-  font-size: 0;
-  width: 729px;
-}
-
-.stack.player-hand .card {
-  display: inline-block;
-  margin-right: 3px;
-}
-
-.stack.player-hand .card:last-child {
-  margin-right: 0px;
-}
-
 .card.power.agl-5  { background-position: -10px     0px; }
 .card.power.int-1  { background-position: -90px     0px; }
 .card.power.int-2  { background-position: -170px    0px; }
