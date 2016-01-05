@@ -47,4 +47,35 @@ $(function () {
     game.find('.selected').removeClass('selected');
   });
 
+  GameKeys.registerKeyDownHandler('left', function () {
+    rotateSelectedCard(-1);
+  });
+
+  GameKeys.registerKeyDownHandler('right', function () {
+    rotateSelectedCard(+1);
+  });
+
+  var rotClasses = ['rot-90', 'rot-180', 'rot-270'];
+
+  var rotateSelectedCard = function (direction) {
+    var card = game.find('.card.selected');
+    if (card[0]) {
+      for (var i = 0; i < rotClasses.length; i++) {
+        if (card.hasClass(rotClasses[i])) {
+          card.removeClass(rotClasses[i]);
+          // doesn't add anything if out of range
+          card.addClass(rotClasses[i+direction]);
+          return;
+        }
+      }
+      // nothing found, set first or last depending
+      // on direction
+      if (direction > 0) {
+        card.addClass(rotClasses[0]);
+      } else {
+        card.addClass(rotClasses[2]);
+      }
+    }
+  };
+
 });
