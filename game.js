@@ -17,7 +17,10 @@ $(function () {
     event.originalEvent.dataTransfer.dropEffect = 'move';
   });
   stacks.on('dragenter', function (event) {
-    $(this).addClass('stack-hover');
+    var stack = $(this);
+    if (stack.filter('.single:has(.card)').length == 0) {
+      stack.addClass('stack-hover');
+    }
   });
   stacks.on('dragleave', function (event) {
     $(this).removeClass('stack-hover');
@@ -28,15 +31,15 @@ $(function () {
   stacks.on('drop', function (event) {
     event.preventDefault();
     var stack = $(this);
-    setTimeout(function () {
-      var card = draggable.detach();
-      stack.prepend(card);
-      draggable = null;
-    }, 0);
+    // don't drop if we're single and have a card
+    if (stack.filter('.single:has(.card)').length == 0) {
+      setTimeout(function () {
+        var card = draggable.detach();
+        stack.prepend(card);
+        draggable = null;
+      }, 0);
+    }
   });
-
-  // // disable all single stacks that have a card in them
-  // game.find('.stack.single:has(.card)').droppable('disable');
 
   game.on('click', '.card', function (event) {
     var card = $(this);
