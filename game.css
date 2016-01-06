@@ -3,6 +3,10 @@ body {
   padding: 0px;
 }
 
+[draggable] {
+  user-select: none;
+}
+
 #game {
   position: absolute;
   background: lightblue;

@@ -1,36 +1,42 @@
 $(function () {
 
   var game = $('#game');
+  var cards  = game.find('.card');
+  var stacks = game.find('.stack');
 
-  game.find('.card').draggable({
-    revert: true,
-    revertDuration: 0,
-    containment: 'window',
-    appendTo: document.body,
-    helper: 'clone'
+  var draggable;
+
+  cards.attr('draggable', 'true');
+  cards.on('dragstart', function (event) {
+    var dataTransfer = event.originalEvent.dataTransfer;
+    dataTransfer.effectAllowed = 'move';
+    draggable = $(this);
   });
-  game.find('.stack').droppable({
-    hoverClass: 'stack-hover',
-    drop: function (event, ui) {
-      // re-enable single from stack
-      var from = $(ui.draggable).parent('.stack');
-      if (from.hasClass('single')) {
-        from.droppable('enable');
-      }
-      // move to the new stack
-      var stack = $(this);
-      setTimeout(function () {
-        var card = $(ui.draggable).detach();
-        stack.prepend(card);
-      }, 0);
-      // disable this stack if it's a single
-      if (stack.hasClass('single')) {
-        stack.droppable('disable');
-      }
-    }
+  stacks.on('dragover', function (event) {
+    event.preventDefault();
+    event.originalEvent.dataTransfer.dropEffect = 'move';
   });
-  // disable all single stacks that have a card in them
-  game.find('.stack.single:has(.card)').droppable('disable');
+  stacks.on('dragenter', function (event) {
+    $(this).addClass('stack-hover');
+  });
+  stacks.on('dragleave', function (event) {
+    $(this).removeClass('stack-hover');
+  });
+  stacks.on('dragend', function (event) {
+    game.find('.stack').removeClass('stack-hover');
+  });
+  stacks.on('drop', function (event) {
+    event.preventDefault();
+    var stack = $(this);
+    setTimeout(function () {
+      var card = draggable.detach();
+      stack.prepend(card);
+      draggable = null;
+    }, 0);
+  });
+
+  // // disable all single stacks that have a card in them
+  // game.find('.stack.single:has(.card)').droppable('disable');
 
   game.on('click', '.card', function (event) {
     var card = $(this);

@@ -4,7 +4,10 @@
     <link rel="stylesheet" type="text/css" href="game.css"/>
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="http://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-    <script src="lib/jquery.ui.touch-punch.min.js"></script>
+    <script>
+      var iosDragDropShim = { enableEnterLeave: true }
+    </script>
+    <script src="lib/ios-drag-drop.js"></script>
     <script src="lib/gamekeys.js"></script>
     <script src="game.js"></script>
   </head>
