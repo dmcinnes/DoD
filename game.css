@@ -24,13 +24,13 @@ body {
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   border-radius: 9px;
   /* so the back will show when flipped */
-  transform: translateZ(1px);
   transition: 0.05s ease-out;
   z-index: 0;
   background-size: 330%;
 }
 
 .card:after {
+  visibility: hidden;
   content: '';
   position: absolute;
   border-radius: 9px;
@@ -38,12 +38,11 @@ body {
   bottom: 0px;
   top: 0px;
   left: 0px;
-  transform: rotateY( 180deg );
   background-size: 101%;
 }
 
-.card.face-down {
-  transform: rotateY( 180deg );
+.card.face-down:after {
+  visibility: visible;
 }
 
 .card.selected {
@@ -96,8 +95,8 @@ body {
   display: block;
 }
 
-.stack.face-down .card:first-child {
-  transform: rotateY(180deg);
+.stack.face-down .card:first-child:after {
+  visibility: visible;
 }
 
 .stack.stack-hover {
