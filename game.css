@@ -58,7 +58,7 @@ body {
 }
 
 .card.rot-90 {
-  transform: rotate( 90deg );
+  transform: translate(16px, -16px) rotate( 90deg );
 }
 
 .card.rot-180 {
@@ -66,7 +66,7 @@ body {
 }
 
 .card.rot-270 {
-  transform: rotate( 270deg );
+  transform: translate(16px, -16px) rotate( 270deg );
 }
 
 .card.power {
@@ -100,6 +100,11 @@ body {
 
 .stack.stack-hover {
   border: solid yellow 3px;
+}
+
+.stack.inventory .card {
+  display: block;
+  margin-bottom: -90px;
 }
 
 .card.power.agl-5  { background-position: -10px     0px; }
