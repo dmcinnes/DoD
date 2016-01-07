@@ -25,7 +25,7 @@ body {
   border-radius: 9px;
   transition: 0.05s ease-out;
   z-index: 0;
-  background-size: 235px 668px;
+  background-size: 236px 779px;
 }
 
 .card:after {
@@ -109,24 +109,27 @@ body {
 
 .card.power.agl-5  { background-position:   0px     0px; }
 .card.power.int-1  { background-position: -79px     0px; }
-.card.power.int-2  { background-position: -157px    0px; }
+.card.power.int-2  { background-position: -158px    0px; }
 
 .card.power.int-3  { background-position:   0px  -112px; }
 .card.power.int-4  { background-position: -79px  -112px; }
-.card.power.int-5  { background-position: -157px -112px; }
+.card.power.int-5  { background-position: -158px -112px; }
 
 .card.power.move-1 { background-position:   0px  -223px; }
 .card.power.move-2 { background-position: -79px  -223px; }
-.card.power.move-3 { background-position: -157px -223px; }
+.card.power.move-3 { background-position: -158px -223px; }
 
 .card.power.str-1  { background-position:   0px  -334px; }
 .card.power.str-2  { background-position: -79px  -334px; }
-.card.power.str-3  { background-position: -157px -334px; }
+.card.power.str-3  { background-position: -158px -334px; }
 
 .card.power.str-4  { background-position:   0px  -446px; }
 .card.power.str-5  { background-position: -79px  -446px; }
-.card.power.agl-1  { background-position: -157px -446px; }
+.card.power.agl-1  { background-position: -158px -446px; }
 
 .card.power.agl-2  { background-position:   0px  -557px; }
 .card.power.agl-3  { background-position: -79px  -557px; }
-.card.power.agl-4  { background-position: -157px -557px; }
+.card.power.agl-4  { background-position: -158px -557px; }
+
+.card.power.move-4 { background-position:   0px  -668px; }
+.card.power.move-5 { background-position: -79px  -668px; }
