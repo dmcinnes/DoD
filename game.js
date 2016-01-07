@@ -35,7 +35,7 @@ $(function () {
     if (stack.filter('.single:has(.card)').length == 0) {
       setTimeout(function () {
         var card = draggable.detach();
-        stack.prepend(card);
+        stack.append(card);
         draggable = null;
       }, 0);
     }

@@ -90,11 +90,11 @@ body {
   display: none;
 }
 
-.stack .card:first-child {
+.stack .card:last-child {
   display: block;
 }
 
-.stack.face-down .card:first-child:after {
+.stack.face-down .card:last-child:after {
   visibility: visible;
 }
 
