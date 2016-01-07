@@ -42,18 +42,14 @@ $(function () {
   });
 
   game.on('click', '.card', function (event) {
-    var card = $(this);
-    var selected = $(this).hasClass('selected');
-    game.find('.selected').removeClass('selected');
-    if (!selected) {
-      card.addClass('selected');
-    }
     event.stopPropagation();
+    unselectCards();
+    selectCard($(this));
   });
 
   game.on('click', function (event) {
     event.preventDefault();
-    game.find('.selected').removeClass('selected');
+    unselectCards();
   });
 
   GameKeys.registerKeyDownHandler('left', function () {
@@ -63,6 +59,31 @@ $(function () {
   GameKeys.registerKeyDownHandler('right', function () {
     rotateSelectedCard(+1);
   });
+
+  var selectCard = function (card) {
+    var selected = card.hasClass('selected');
+    if (!selected) {
+      card.addClass('selected');
+      var bgSize    = card.css('background-size').split(' ');;
+      var bgLeft    = parseInt(bgSize[0], 10) * 5;
+      var bgTop     = parseInt(bgSize[1], 10) * 5;
+      var bgPos     = card.css('background-position').split(' ');;
+      var bgPosLeft = parseInt(bgPos[0], 10) * 5;
+      var bgPosTop  = parseInt(bgPos[1], 10) * 5;
+      card.css({
+        backgroundSize:     bgLeft    + 'px ' + bgTop    + 'px',
+        backgroundPosition: bgPosLeft + 'px ' + bgPosTop + 'px'
+      });
+    }
+  };
+
+  var unselectCards = function () {
+    game.find('.selected').removeClass('selected').
+      css({
+        backgroundSize:     '',
+        backgroundPosition: ''
+      });
+  };
 
   var rotClasses = ['rot-90', 'rot-180', 'rot-270'];
 
