@@ -6,11 +6,21 @@ $(function () {
 
   var draggable;
 
+  var isTouchscreen = function () {
+    return /iPad|iPhone|iPod|Android/.test(navigator.userAgent);
+  };
+
   cards.attr('draggable', 'true');
   cards.on('dragstart', function (event) {
-    var dataTransfer = event.originalEvent.dataTransfer;
-    dataTransfer.effectAllowed = 'move';
     draggable = $(this);
+    var originalEvent = event.originalEvent;
+    var dataTransfer = originalEvent.dataTransfer;
+    dataTransfer.effectAllowed = 'move';
+    if (!isTouchscreen()) {
+      var x = originalEvent.layerX;
+      var y = originalEvent.layerY;
+      dataTransfer.setDragImage(draggable[0], x, y);
+    }
   });
   stacks.on('dragover', function (event) {
     event.preventDefault();
