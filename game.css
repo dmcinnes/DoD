@@ -77,8 +77,8 @@ body {
 }
 
 .card.room {
+  transform: translate(16px, -16px) rotate( 90deg );
   background-image: url(cards/rooms.png);
-  /* transform: rotate( 90deg ); */
   background-size: 555px 332px;
 }
 .card.room:after {
@@ -116,6 +116,11 @@ body {
 .stack.inventory .card {
   display: block;
   margin-bottom: -90px;
+}
+
+.stack.rooms {
+  width: 110px;
+  height: 79px;
 }
 
 .card.power.agl-5  { background-position:   0px     0px; }
