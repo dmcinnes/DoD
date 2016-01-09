@@ -78,8 +78,8 @@ body {
 
 .card.room {
   background-image: url(cards/rooms.png);
-  transform: rotate( 90deg );
-  background-size: 552px 332px;
+  /* transform: rotate( 90deg ); */
+  background-size: 555px 332px;
 }
 .card.room:after {
   background-image: url(cards/rooms.png);
@@ -149,22 +149,22 @@ body {
 .card.power:after  { background-position: -158px -668px; }
 
 .card.room.tied-figure       { background-position:      0px    0px; }
-.card.room.hidden-door-1     { background-position:    -79px    0px; }
-.card.room.hidden-door-2     { background-position:   -158px    0px; }
-.card.room.large-chest       { background-position:   -237px    0px; }
-.card.room.guardian-monster  { background-position:   -316px    0px; }
-.card.room.boulder-trap      { background-position:   -395px    0px; }
+.card.room.hidden-door-1     { background-position:    -80px    0px; }
+.card.room.hidden-door-2     { background-position:   -159px    0px; }
+.card.room.large-chest       { background-position:   -238px    0px; }
+.card.room.guardian-monster  { background-position:   -318px    0px; }
+.card.room.boulder-trap      { background-position:   -397px    0px; }
 
 .card.room.rusty-cell        { background-position:      0px -111px; }
-.card.room.noxious-blooms    { background-position:    -79px -111px; }
-.card.room.hidden-door-3     { background-position:   -158px -111px; }
-.card.room.hall-of-echos     { background-position:   -237px -111px; }
-.card.room.dark-storeroom    { background-position:   -316px -111px; }
-.card.room.steep-chasm       { background-position:   -395px -111px; }
+.card.room.noxious-blooms    { background-position:    -80px -111px; }
+.card.room.hidden-door-3     { background-position:   -159px -111px; }
+.card.room.hall-of-echos     { background-position:   -238px -111px; }
+.card.room.dark-storeroom    { background-position:   -318px -111px; }
+.card.room.steep-chasm       { background-position:   -397px -111px; }
 
 .card.room.mystic-portal     { background-position:      0px -222px; }
-.card.room.grand-hall        { background-position:    -79px -222px; }
-.card.room.hidden-door-4     { background-position:   -158px -222px; }
-.card.room.peculiar-shop     { background-position:   -237px -222px; }
-.card.room.carnivorous-plant { background-position:   -316px -222px; }
-.card.room.snake-pit         { background-position:   -395px -222px; }
+.card.room.grand-hall        { background-position:    -80px -222px; }
+.card.room.hidden-door-4     { background-position:   -159px -222px; }
+.card.room.peculiar-shop     { background-position:   -238px -222px; }
+.card.room.carnivorous-plant { background-position:   -318px -222px; }
+.card.room.snake-pit         { background-position:   -397px -222px; }
