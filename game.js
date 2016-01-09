@@ -42,9 +42,12 @@ $(function () {
   });
 
   game.on('click', '.card', function (event) {
-    event.stopPropagation();
-    unselectCards();
-    selectCard($(this));
+    var card = $(this);
+    if (card.closest('.face-down').length == 0) {
+      event.stopPropagation();
+      unselectCards();
+      selectCard($(this));
+    }
   });
 
   game.on('click', function (event) {
