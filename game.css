@@ -215,3 +215,106 @@ body {
 .card.misc.gold-5-9    { background-position:   -158px -778px; }
 .card.misc.gold-10-30  { background-position:      0px -556px; }
 .card.misc.gold-40-70  { background-position:   -158px -889px; }
+
+.stack.gold {
+  border: none;
+}
+
+.stack.gold .card.misc {
+  display: block;
+  position: absolute;
+  visibility: hidden;
+}
+
+.stack.gold .gold-10-30, .stack.gold .gold-40-70 {
+  z-index: 10;
+  margin-top: 31px;
+}
+
+.stack.gold[data-gold$='0'] .gold-0-4 {
+  visibility: visible;
+  transform: rotate( 180deg );
+}
+
+.stack.gold[data-gold$='1'] .gold-0-4 {
+  visibility: visible;
+  transform: translate(-2px, 0px) rotate( 108deg );
+}
+
+.stack.gold[data-gold$='2'] .gold-0-4 {
+  visibility: visible;
+  transform: translate(-2px, 2px) rotate( 36deg );
+}
+
+.stack.gold[data-gold$='3'] .gold-0-4 {
+  visibility: visible;
+  transform: translate(0px, 2px) rotate( 324deg );
+}
+
+.stack.gold[data-gold$='4'] .gold-0-4 {
+  visibility: visible;
+  transform: translate(2px, 0px) rotate( 252deg );
+}
+
+.stack.gold[data-gold$='5'] .gold-5-9 {
+  visibility: visible;
+  transform: rotate( 180deg );
+}
+
+.stack.gold[data-gold$='6'] .gold-5-9 {
+  visibility: visible;
+  transform: translate(-2px, 0px) rotate( 108deg );
+}
+
+.stack.gold[data-gold$='7'] .gold-5-9 {
+  visibility: visible;
+  transform: translate(-2px, 2px) rotate( 36deg );
+}
+
+.stack.gold[data-gold$='8'] .gold-5-9 {
+  visibility: visible;
+  transform: translate(0px, 2px) rotate( 324deg );
+}
+
+.stack.gold[data-gold$='9'] .gold-5-9 {
+  visibility: visible;
+  transform: translate(2px, 0px) rotate( 252deg );
+}
+
+.stack.gold[data-gold^='0'] .gold-10-30 {
+  visibility: visible;
+}
+
+.stack.gold[data-gold^='1'] .gold-10-30 {
+  visibility: visible;
+  transform: translate(0px, -16px) rotate( -90deg );
+}
+
+.stack.gold[data-gold^='2'] .gold-10-30 {
+  visibility: visible;
+  transform: rotate( 180deg );
+}
+
+.stack.gold[data-gold^='3'] .gold-10-30 {
+  visibility: visible;
+  transform: translate(0px, -16px) rotate( 90deg );
+}
+
+.stack.gold[data-gold^='4'] .gold-40-70 {
+  visibility: visible;
+}
+
+.stack.gold[data-gold^='5'] .gold-40-70 {
+  visibility: visible;
+  transform: translate(0px, -16px) rotate( -90deg );
+}
+
+.stack.gold[data-gold^='6'] .gold-40-70 {
+  visibility: visible;
+  transform: rotate( 180deg );
+}
+
+.stack.gold[data-gold^='7'] .gold-40-70 {
+  visibility: visible;
+  transform: translate(0px, -16px) rotate( 90deg );
+}
