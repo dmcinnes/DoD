@@ -109,17 +109,25 @@ $(function () {
 
   var updateGold = function (increment) {
     var goldStack = $('.stack.gold');
-    var gold = goldStack.attr('data-gold') || 0;
+    var gold = goldStack.attr('data-gold-tens') +
+               goldStack.attr('data-gold-ones');
     var gold = parseInt(gold, 10) + increment;
     if (gold < 0) {
-      gold = '00';
-    } else if (gold < 10) {
-      // make sure we have two digits for rendering
-      gold = '0' + gold;
+      gold = 0;
     } else if (gold > 79) {
-      gold = '79';
+      gold = 79;
     }
-    goldStack.attr('data-gold', gold);
+    var ones, tens = ''
+    if (gold < 10) {
+      // make tens empty when there isn't any
+      // so the tooltip is rendered propery
+      tens = '';
+    } else {
+      tens = Math.floor(gold / 10);
+    }
+    ones = gold % 10;
+    goldStack.attr('data-gold-tens', tens);
+    goldStack.attr('data-gold-ones', ones);
   };
 
   var rotClasses = ['rot-90', 'rot-180', 'rot-270'];
