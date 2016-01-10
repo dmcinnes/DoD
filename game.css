@@ -134,6 +134,11 @@ body {
   background-position: 0px -668px;
 }
 
+.card.misc {
+  background-image: url(cards/misc.png);
+  background-size: 236px 1111px;
+}
+
 .card.power.agl-5  { background-position:   0px     0px; }
 .card.power.int-1  { background-position: -79px     0px; }
 .card.power.int-2  { background-position: -158px    0px; }
@@ -205,3 +210,8 @@ body {
 .card.character.gladiator { background-position:   0px  -557px; }
 .card.character.barbarian { background-position: -79px  -557px; }
 .card.character.dwarf     { background-position: -158px -557px; }
+
+.card.misc.gold-0-4    { background-position:      0px -445px; }
+.card.misc.gold-5-9    { background-position:   -158px -778px; }
+.card.misc.gold-10-30  { background-position:      0px -556px; }
+.card.misc.gold-40-70  { background-position:   -158px -889px; }
