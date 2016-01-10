@@ -217,13 +217,41 @@ body {
 .card.misc.gold-40-70  { background-position:   -158px -889px; }
 
 .stack.gold {
+  position: relative;
   border: none;
+  text-align: center;
+}
+
+.stack.gold:hover:after {
+  position: absolute;
+  content: attr(data-gold-tens) '' attr(data-gold-ones);
+  z-index: 100;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  left: 0px;
+  margin-top: 10px;
+  font-weight: bold;
+  font: 4em "Open Sans", sans-serif;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.4);
+}
+
+.stack.gold:hover .misc:before {
+  visibility: visible;
+  content: '';
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  top: 0px;
+  left: 0px;
+  z-index: 99;
+  background-color: rgba(255,255,0,0.5);
+  border-radius: 9px;
 }
 
 .stack.gold .card.misc {
-  display: block;
+  display: none;
   position: absolute;
-  visibility: hidden;
 }
 
 .stack.gold .gold-10-30, .stack.gold .gold-40-70 {
@@ -231,90 +259,90 @@ body {
   margin-top: 31px;
 }
 
-.stack.gold[data-gold$='0'] .gold-0-4 {
-  visibility: visible;
+.stack.gold[data-gold-ones='0'] .gold-0-4 {
+  display: block;
   transform: rotate( 180deg );
 }
 
-.stack.gold[data-gold$='1'] .gold-0-4 {
-  visibility: visible;
+.stack.gold[data-gold-ones='1'] .gold-0-4 {
+  display: block;
   transform: translate(-2px, 0px) rotate( 108deg );
 }
 
-.stack.gold[data-gold$='2'] .gold-0-4 {
-  visibility: visible;
+.stack.gold[data-gold-ones='2'] .gold-0-4 {
+  display: block;
   transform: translate(-2px, 2px) rotate( 36deg );
 }
 
-.stack.gold[data-gold$='3'] .gold-0-4 {
-  visibility: visible;
+.stack.gold[data-gold-ones='3'] .gold-0-4 {
+  display: block;
   transform: translate(0px, 2px) rotate( 324deg );
 }
 
-.stack.gold[data-gold$='4'] .gold-0-4 {
-  visibility: visible;
+.stack.gold[data-gold-ones='4'] .gold-0-4 {
+  display: block;
   transform: translate(2px, 0px) rotate( 252deg );
 }
 
-.stack.gold[data-gold$='5'] .gold-5-9 {
-  visibility: visible;
+.stack.gold[data-gold-ones='5'] .gold-5-9 {
+  display: block;
   transform: rotate( 180deg );
 }
 
-.stack.gold[data-gold$='6'] .gold-5-9 {
-  visibility: visible;
+.stack.gold[data-gold-ones='6'] .gold-5-9 {
+  display: block;
   transform: translate(-2px, 0px) rotate( 108deg );
 }
 
-.stack.gold[data-gold$='7'] .gold-5-9 {
-  visibility: visible;
+.stack.gold[data-gold-ones='7'] .gold-5-9 {
+  display: block;
   transform: translate(-2px, 2px) rotate( 36deg );
 }
 
-.stack.gold[data-gold$='8'] .gold-5-9 {
-  visibility: visible;
+.stack.gold[data-gold-ones='8'] .gold-5-9 {
+  display: block;
   transform: translate(0px, 2px) rotate( 324deg );
 }
 
-.stack.gold[data-gold$='9'] .gold-5-9 {
-  visibility: visible;
+.stack.gold[data-gold-ones='9'] .gold-5-9 {
+  display: block;
   transform: translate(2px, 0px) rotate( 252deg );
 }
 
-.stack.gold[data-gold^='0'] .gold-10-30 {
-  visibility: visible;
+.stack.gold[data-gold-tens=''] .gold-10-30 {
+  display: block;
 }
 
-.stack.gold[data-gold^='1'] .gold-10-30 {
-  visibility: visible;
+.stack.gold[data-gold-tens='1'] .gold-10-30 {
+  display: block;
   transform: translate(0px, -16px) rotate( -90deg );
 }
 
-.stack.gold[data-gold^='2'] .gold-10-30 {
-  visibility: visible;
+.stack.gold[data-gold-tens='2'] .gold-10-30 {
+  display: block;
   transform: rotate( 180deg );
 }
 
-.stack.gold[data-gold^='3'] .gold-10-30 {
-  visibility: visible;
+.stack.gold[data-gold-tens='3'] .gold-10-30 {
+  display: block;
   transform: translate(0px, -16px) rotate( 90deg );
 }
 
-.stack.gold[data-gold^='4'] .gold-40-70 {
-  visibility: visible;
+.stack.gold[data-gold-tens='4'] .gold-40-70 {
+  display: block;
 }
 
-.stack.gold[data-gold^='5'] .gold-40-70 {
-  visibility: visible;
+.stack.gold[data-gold-tens='5'] .gold-40-70 {
+  display: block;
   transform: translate(0px, -16px) rotate( -90deg );
 }
 
-.stack.gold[data-gold^='6'] .gold-40-70 {
-  visibility: visible;
+.stack.gold[data-gold-tens='6'] .gold-40-70 {
+  display: block;
   transform: rotate( 180deg );
 }
 
-.stack.gold[data-gold^='7'] .gold-40-70 {
-  visibility: visible;
+.stack.gold[data-gold-tens='7'] .gold-40-70 {
+  display: block;
   transform: translate(0px, -16px) rotate( 90deg );
 }
