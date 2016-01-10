@@ -14,6 +14,42 @@ body {
   height: 100%;
 }
 
+.stack {
+  display: inline-block;
+  width: 79px;
+  height: 110px;
+  border-radius: 9px;
+  border: solid black 3px;
+  margin: 5px;
+  padding: 2px;
+}
+
+.stack .card {
+  display: none;
+}
+
+.stack .card:last-child {
+  display: block;
+}
+
+.stack.face-down .card:last-child:after {
+  visibility: visible;
+}
+
+.stack.stack-hover {
+  border: solid yellow 3px;
+}
+
+.stack.inventory .card {
+  display: block;
+  margin-bottom: -90px;
+}
+
+.stack.rooms {
+  width: 110px;
+  height: 79px;
+}
+
 .card {
   transform-style: preserve-3d;
   display: inline-block;
@@ -74,6 +110,7 @@ body {
 .card.power:after {
   background-image: url(cards/power.png);
   background-size: 236px 779px;
+  background-position: -158px -668px;
 }
 
 .card.room {
@@ -87,40 +124,14 @@ body {
   background-position: -476px 0px;
 }
 
-.stack {
-  display: inline-block;
-  width: 79px;
-  height: 110px;
-  border-radius: 9px;
-  border: solid black 3px;
-  margin: 5px;
-  padding: 2px;
+.card.character {
+  background-image: url(cards/characters.png);
+  background-size: 236px 779px;
 }
-
-.stack .card {
-  display: none;
-}
-
-.stack .card:last-child {
-  display: block;
-}
-
-.stack.face-down .card:last-child:after {
-  visibility: visible;
-}
-
-.stack.stack-hover {
-  border: solid yellow 3px;
-}
-
-.stack.inventory .card {
-  display: block;
-  margin-bottom: -90px;
-}
-
-.stack.rooms {
-  width: 110px;
-  height: 79px;
+.card.character:after {
+  background-image: url(cards/characters.png);
+  background-size: 236px 779px;
+  background-position: 0px -668px;
 }
 
 .card.power.agl-5  { background-position:   0px     0px; }
@@ -150,9 +161,6 @@ body {
 .card.power.move-4 { background-position:   0px  -668px; }
 .card.power.move-5 { background-position: -79px  -668px; }
 
-/* for the back of the power cards */
-.card.power:after  { background-position: -158px -668px; }
-
 .card.room.tied-figure       { background-position:      0px    0px; }
 .card.room.hidden-door-1     { background-position:    -80px    0px; }
 .card.room.hidden-door-2     { background-position:   -159px    0px; }
@@ -173,3 +181,27 @@ body {
 .card.room.peculiar-shop     { background-position:   -238px -222px; }
 .card.room.carnivorous-plant { background-position:   -318px -222px; }
 .card.room.snake-pit         { background-position:   -397px -222px; }
+
+.card.character.wrestler  { background-position:    0px    0px; }
+.card.character.scholar   { background-position:  -79px    0px; }
+.card.character.merchant  { background-position: -158px    0px; }
+
+.card.character.amazon    { background-position:    0px -111px; }
+.card.character.thief     { background-position:  -79px -111px; }
+.card.character.merchant  { background-position: -158px -111px; }
+
+.card.character.hobbit    { background-position:   0px  -222px; }
+.card.character.miner     { background-position: -79px  -222px; }
+.card.character.monk      { background-position: -158px -222px; }
+
+.card.character.ranger    { background-position:    0px -334px; }
+.card.character.ninja     { background-position:  -79px -334px; }
+.card.character.knight    { background-position: -158px -334px; }
+
+.card.character.elf       { background-position:    0px -445px; }
+.card.character.bard      { background-position:  -79px -445px; }
+.card.character.brawler   { background-position: -158px -445px; }
+
+.card.character.gladiator { background-position:   0px  -557px; }
+.card.character.barbarian { background-position: -79px  -557px; }
+.card.character.dwarf     { background-position: -158px -557px; }
