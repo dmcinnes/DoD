@@ -11,7 +11,7 @@ $(function () {
   };
 
   // set all cards not marked as non-draggable to draggable
-  cards.not('[draggable=false]').attr('draggable', 'true');
+  cards.not('.misc').attr('draggable', 'true');
   cards.on('dragstart', function (event) {
     draggable = $(this);
     var originalEvent = event.originalEvent;
