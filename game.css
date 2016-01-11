@@ -100,7 +100,7 @@ body {
 }
 
 .card.rot-270 {
-  transform: translate(16px, -16px) rotate( 270deg );
+  transform: translate(16px, -16px) rotate( -90deg );
 }
 
 .card.power {
