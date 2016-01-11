@@ -211,13 +211,18 @@ body {
 .card.character.barbarian { background-position: -79px  -557px; }
 .card.character.dwarf     { background-position: -158px -557px; }
 
-.card.misc.gold-0-4    { background-position:      0px -445px; }
-.card.misc.gold-5-9    { background-position:   -158px -778px; }
-.card.misc.gold-10-30  { background-position:      0px -556px; }
-.card.misc.gold-40-70  { background-position:   -158px -889px; }
+.card.misc.gold-0-4    { background-position:    0px -445px; }
+.card.misc.gold-5-9    { background-position: -158px -778px; }
+.card.misc.gold-10-30  { background-position:    0px -556px; }
+.card.misc.gold-40-70  { background-position: -158px -889px; }
 
-.card.misc.level-1-4   { background-position:      0px -334px; }
-.card.misc.level-5-8   { background-position:   -158px -667px; }
+.card.misc.level-1-4   { background-position:    0px -334px; }
+.card.misc.level-5-8   { background-position: -158px -667px; }
+
+.card.misc.monster-beast     { background-position:  -79px -334px; }
+.card.misc.monster-greenskin { background-position: -158px -334px; }
+.card.misc.monster-frost     { background-position:  -79px -445px; }
+.card.misc.monster-undead    { background-position: -158px -445px; }
 
 .stack.gold {
   position: relative;
@@ -396,4 +401,63 @@ body {
 #game[data-level='8'] .level-5-8 {
   display: block;
   transform: translate(0px, -16px) rotate( 90deg );
+}
+
+.stack.monsters {
+  position: relative;
+  border: none;
+  width: 400px;
+}
+
+.stack.monsters .misc {
+  display: block;
+  position: absolute;
+}
+
+#game[data-level='1'] .monster-frost {
+}
+#game[data-level='1'] .monster-beast {
+  transform: translate(80px, 0px);
+}
+#game[data-level='1'] .monster-undead {
+  transform: translate(160px, 0px);
+}
+#game[data-level='1'] .monster-greenskin {
+  transform: translate(256px, 16px) rotate( -90deg );
+}
+
+#game[data-level='2'] .monster-frost {
+}
+#game[data-level='2'] .monster-greenskin {
+  transform: translate(80px, 0px);
+}
+#game[data-level='2'] .monster-undead {
+  transform: translate(160px, 0px);
+}
+#game[data-level='2'] .monster-beast {
+  transform: translate(256px, 16px) rotate( -90deg );
+}
+
+#game[data-level='3'] .monster-greenskin {
+}
+#game[data-level='3'] .monster-frost {
+  transform: translate(96px, 16px) rotate( -90deg );
+}
+#game[data-level='3'] .monster-beast {
+  transform: translate(208px, 16px) rotate( -90deg );
+}
+#game[data-level='3'] .monster-undead {
+  transform: translate(304px, 0px) rotate( 180deg );
+}
+
+#game[data-level='4'] .monster-beast {
+}
+#game[data-level='4'] .monster-undead {
+  transform: translate(96px, 16px) rotate( -90deg );
+}
+#game[data-level='4'] .monster-greenskin {
+  transform: translate(208px, 16px) rotate( -90deg );
+}
+#game[data-level='4'] .monster-frost {
+  transform: translate(304px, 0px) rotate( 180deg );
 }
