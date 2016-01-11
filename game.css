@@ -461,3 +461,55 @@ body {
 #game[data-level='4'] .monster-frost {
   transform: translate(304px, 0px) rotate( 180deg );
 }
+
+#game[data-level='5'] .monster-frost {
+  transform: translate(0px, 16px) rotate( -90deg );
+}
+#game[data-level='5'] .monster-greenskin {
+  transform: translate(112px, 16px) rotate( -90deg );
+}
+#game[data-level='5'] .monster-undead {
+  transform: translate(208px, 0px) rotate( 180deg );
+}
+#game[data-level='5'] .monster-beast {
+  transform: translate(288px, 0px) rotate( 180deg );
+}
+
+#game[data-level='6'] .monster-beast {
+  transform: translate(16px, 16px) rotate( -90deg );
+}
+#game[data-level='6'] .monster-frost {
+  transform: translate(112px, 0px) rotate( 180deg );
+}
+#game[data-level='6'] .monster-greenskin {
+  transform: translate(192px, 0px) rotate( 180deg );
+}
+#game[data-level='6'] .monster-undead {
+  transform: translate(288px, 16px) rotate( 90deg );
+}
+
+#game[data-level='7'] .monster-frost {
+  transform: translate(0px, 0px) rotate( 180deg );
+}
+#game[data-level='7'] .monster-greenskin {
+  transform: translate(80px, 0px) rotate( 180deg );
+}
+#game[data-level='7'] .monster-undead {
+  transform: translate(176px, 16px) rotate( 90deg );
+}
+#game[data-level='7'] .monster-beast {
+  transform: translate(288px, 16px) rotate( 90deg );
+}
+
+#game[data-level='8'] .monster-beast {
+  transform: translate(0px, 0px) rotate( 180deg );
+}
+#game[data-level='8'] .monster-undead {
+  transform: translate(96px, 16px) rotate( 90deg );
+}
+#game[data-level='8'] .monster-greenskin {
+  transform: translate(208px, 16px) rotate( 90deg );
+}
+#game[data-level='8'] .monster-frost {
+  transform: translate(320px, 16px) rotate( 90deg );
+}
