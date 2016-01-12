@@ -224,6 +224,9 @@ body {
 .card.misc.monster-frost     { background-position:  -79px -445px; }
 .card.misc.monster-undead    { background-position: -158px -445px; }
 
+.card.misc.arrows { background-position: -158px -556px; }
+.card.misc.fruits { background-position:  -79px -556px; }
+
 .stack.gold {
   position: relative;
   border: none;
