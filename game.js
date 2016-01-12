@@ -29,7 +29,8 @@ $(function () {
   });
   stacks.on('dragenter', function (event) {
     var stack = $(this);
-    if (stack.filter('.single:has(.card)').length == 0) {
+    var limit = stack.data('limit');
+    if (stack.children('.card').length < limit) {
       stack.addClass('stack-hover');
     }
   });
@@ -42,8 +43,8 @@ $(function () {
   stacks.on('drop', function (event) {
     event.preventDefault();
     var stack = $(this);
-    // don't drop if we're single and have a card
-    if (stack.filter('.single:has(.card)').length == 0) {
+    var limit = stack.data('limit');
+    if (stack.children('.card').length < limit) {
       setTimeout(function () {
         var card = draggable.detach();
         stack.append(card);
