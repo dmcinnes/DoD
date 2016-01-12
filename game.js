@@ -10,8 +10,11 @@ $(function () {
     return /iPad|iPhone|iPod|Android/.test(navigator.userAgent);
   };
 
-  // set all cards not marked as non-draggable to draggable
+  // set all non misc cards to draggable
   cards.not('.misc').attr('draggable', 'true');
+  // fruits and arrows are also draggable
+  cards.filter('.fruits,.arrows').attr('draggable', 'true');
+
   cards.on('dragstart', function (event) {
     draggable = $(this);
     var originalEvent = event.originalEvent;
