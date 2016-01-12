@@ -52,7 +52,7 @@ $(function () {
     }
   });
 
-  game.on('click', '.card', function (event) {
+  game.on('click', '.card:not(.selected)', function (event) {
     var card = $(this);
     if (card.closest('.face-down').length == 0) {
       event.stopPropagation();
