@@ -188,6 +188,9 @@ $(function () {
   var nextLevel = function () {
     var level = $('#game').attr('data-level');
     level++;
+    if (level > 8) {
+      return;
+    }
     $('#game').attr('data-level', level);
     var unusedRooms = $('.unused.rooms');
     var roomStack = $('.stack.rooms');
