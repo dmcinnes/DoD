@@ -224,19 +224,23 @@ body {
 .card.misc.monster-frost     { background-position:  -79px -445px; }
 .card.misc.monster-undead    { background-position: -158px -445px; }
 
-.card.misc.arrows { background-position: -158px -556px; }
-.card.misc.fruits { background-position:  -79px -556px; }
+.card.misc.arrows { background-position: -158px  -556px; }
+.card.misc.fruits { background-position:  -79px  -556px; }
+.card.misc.poison { background-position:    0px -1000px; }
+.card.misc.amulet { background-position: -158px  -223px; }
 
-.card.misc.arrows:after {
+.card.misc.arrows:after,
+.card.misc.fruits:after,
+.card.misc.poison:after,
+.card.misc.amulet:after {
   background-image: url(cards/misc.png);
   background-size: 236px 1111px;
-  background-position: -79px -889px;
 }
-.card.misc.fruits:after {
-  background-image: url(cards/misc.png);
-  background-size: 236px 1111px;
-  background-position: 0px -889px;
-}
+
+.card.misc.arrows:after { background-position: -79px  -889px; }
+.card.misc.fruits:after { background-position:   0px  -889px; }
+.card.misc.poison:after { background-position: -79px -1000px; }
+.card.misc.amulet:after { background-position: -79px  -223px; }
 
 .stack.gold {
   position: relative;

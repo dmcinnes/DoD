@@ -12,8 +12,8 @@ $(function () {
 
   // set all non misc cards to draggable
   cards.not('.misc').attr('draggable', 'true');
-  // fruits and arrows are also draggable
-  cards.filter('.fruits,.arrows').attr('draggable', 'true');
+  // fruits, arrows, poison and amulet are also draggable
+  cards.filter('.fruits,.arrows,.poison,.amulet').attr('draggable', 'true');
 
   cards.on('dragstart', function (event) {
     draggable = $(this);
