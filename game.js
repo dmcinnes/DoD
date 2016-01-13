@@ -164,6 +164,56 @@ $(function () {
     }
   };
 
-  shuffle($('.stack:first'));
+  var startGame = function () {
+    $('#game').attr('data-level', 0);
+
+    // put all the character cards back in place
+    $('.card.character').appendTo('.stack.characters');
+    shuffle($('.stack.characters'));
+    $('.card.character:first').appendTo('.stack.player-character');
+
+    // put all the power cards back in place
+    $('.card.power').appendTo('.stack.powers');
+    shuffle($('.stack.powers'));
+
+    var powers = $('.stack.powers').children();
+    var handStacks = $('.player-hand').children();
+    for (var i=0; i < 9; i++) {
+      powers.eq(i).appendTo(handStacks.eq(i));
+    }
+
+    nextLevel();
+  };
+
+  var nextLevel = function () {
+    var level = $('#game').attr('data-level');
+    level++;
+    $('#game').attr('data-level', level);
+    var unusedRooms = $('.unused.rooms');
+    var roomStack = $('.stack.rooms');
+    // move all rooms back to the unused rooms pile and shuffle
+    $('.room').appendTo(unusedRooms);
+    shuffle(unusedRooms);
+    var roomCount = 8;
+    // if we're on level 8 we need the pit of darkness
+    if (level == 8) {
+      roomCount--;
+      $('.room.pit-of-darkness').appendTo(roomStack);
+    }
+    // always need the mystic portal
+    $('.room.mystic-portal').appendTo(roomStack);
+    var rooms = $('.room').not('.pit-of-darkness,.mystic-portal');
+    for (var i=0; i < roomCount; i++) {
+      rooms.eq(i).appendTo(roomStack);
+    }
+    shuffle(roomStack);
+  };
+
+  startGame();
+
+  $('input#next-level').on('click', function (e) {
+    e.preventDefault();
+    nextLevel();
+  });
 
 });
