@@ -157,4 +157,13 @@ $(function () {
     }
   };
 
+  var shuffle = function (stack) {
+    var cards = stack.children();
+    while (cards.length) {
+      stack.append(cards.splice(Math.floor(Math.random() * cards.length), 1)[0]);
+    }
+  };
+
+  shuffle($('.stack:first'));
+
 });
