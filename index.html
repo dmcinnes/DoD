@@ -12,130 +12,146 @@
     <script src="game.js"></script>
   </head>
   <body>
-    <div id="game" data-level="1">
+    <main id="game" data-level="1">
 
-      <div class="stack face-down">
-        <div class="card power int-1"></div>
-        <div class="card power int-2"></div>
-
-        <div class="card power int-3"></div>
-        <div class="card power int-4"></div>
-        <div class="card power int-5"></div>
-
-        <div class="card power move-1"></div>
-        <div class="card power move-2"></div>
-        <div class="card power move-3"></div>
-        <div class="card power move-4"></div>
-        <div class="card power move-5"></div>
-
-        <div class="card power str-1"></div>
-        <div class="card power str-2"></div>
-        <div class="card power str-3"></div>
-
-        <div class="card power str-4"></div>
-        <div class="card power str-5"></div>
-        <div class="card power agl-1"></div>
-
-        <div class="card power agl-2"></div>
-        <div class="card power agl-3"></div>
-      </div>
-
-      <div class="stack">
-      </div>
-
-      <div class="player-hand">
-        <div class="stack" data-limit="1">
-          <div class="card power agl-5"></div>
+      <div class="left-area">
+        <div class="stack level">
+          <div class="card misc level-1-4"></div>
+          <div class="card misc level-5-8"></div>
         </div>
-        <div class="stack" data-limit="1"></div>
-        <div class="stack" data-limit="1"></div>
-        <div class="stack" data-limit="1"></div>
-        <div class="stack" data-limit="1"></div>
-        <div class="stack" data-limit="1"></div>
-        <div class="stack" data-limit="1"></div>
+
+        <div class="stack monsters">
+          <div class="card misc monster-frost"></div>
+          <div class="card misc monster-beast"></div>
+          <div class="card misc monster-undead"></div>
+          <div class="card misc monster-greenskin"></div>
+        </div>
+
+        <div class="play-area">
+        </div>
       </div>
 
-      <div class="stack inventory" data-limit="8"></div>
+      <div class="right-area">
+        <section>
+          <div class="stack rooms face-down">
+          </div>
 
-      <div class="stack face-down rooms">
-        <div class="card room tied-figure"></div>
-        <div class="card room hidden-door-1"></div>
-        <div class="card room hidden-door-2"></div>
-        <div class="card room large-chest"></div>
-        <div class="card room guardian-monster"></div>
-        <div class="card room boulder-trap"></div>
+          <div class="stack face-down characters">
+            <div class="card character wrestler"></div>
+            <div class="card character scholar"></div>
+            <div class="card character merchant"></div>
 
-        <div class="card room rusty-cell"></div>
-        <div class="card room noxious-blooms"></div>
-        <div class="card room hidden-door-3"></div>
-        <div class="card room hall-of-echos"></div>
-        <div class="card room dark-storeroome"></div>
-        <div class="card room steep-chasm"></div>
+            <div class="card character amazon"></div>
+            <div class="card character thief"></div>
+            <div class="card character merchant"></div>
 
-        <div class="card room mystic-portal"></div>
-        <div class="card room grand-hall"></div>
-        <div class="card room hidden-door-4"></div>
-        <div class="card room peculiar-shop"></div>
-        <div class="card room carnivorous-plant"></div>
-        <div class="card room snake-pit"></div>
+            <div class="card character hobbit"></div>
+            <div class="card character miner"></div>
+            <div class="card character monk"></div>
+
+            <div class="card character ranger"></div>
+            <div class="card character ninja"></div>
+            <div class="card character knight"></div>
+
+            <div class="card character elf"></div>
+            <div class="card character bard"></div>
+            <div class="card character brawler"></div>
+
+            <div class="card character gladiator"></div>
+            <div class="card character barbarian"></div>
+            <div class="card character dwarf"></div>
+          </div>
+
+          <div class="stack powers face-down">
+            <div class="card power int-1"></div>
+            <div class="card power int-2"></div>
+            <div class="card power int-3"></div>
+            <div class="card power int-4"></div>
+            <div class="card power int-5"></div>
+
+            <div class="card power move-1"></div>
+            <div class="card power move-2"></div>
+            <div class="card power move-3"></div>
+            <div class="card power move-4"></div>
+            <div class="card power move-5"></div>
+
+            <div class="card power str-1"></div>
+            <div class="card power str-2"></div>
+            <div class="card power str-3"></div>
+            <div class="card power str-4"></div>
+            <div class="card power str-5"></div>
+
+            <div class="card power agl-1"></div>
+            <div class="card power agl-2"></div>
+            <div class="card power agl-3"></div>
+            <div class="card power agl-4"></div>
+            <div class="card power agl-5"></div>
+          </div>
+
+          <div class="stack discard">
+          </div>
+        </section>
+
+        <section class="player-hand">
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+          <div class="stack" data-limit="1"></div>
+        </section>
+
+        <section>
+          <div class="stack player-character" data-limit="1">
+          </div>
+
+          <div class="stack gold" data-gold-tens="" data-gold-ones="0">
+            <div class="card misc gold-5-9"></div>
+            <div class="card misc gold-10-30"></div>
+            <div class="card misc gold-40-70"></div>
+            <div class="card misc gold-0-4"></div>
+          </div>
+
+          <div class="stack inventory" data-limit="8"></div>
+        </section>
+
+        <div class="unused">
+          <div class="card room tied-figure"></div>
+          <div class="card room hidden-door-1"></div>
+          <div class="card room hidden-door-2"></div>
+          <div class="card room large-chest"></div>
+          <div class="card room guardian-monster"></div>
+          <div class="card room boulder-trap"></div>
+
+          <div class="card room rusty-cell"></div>
+          <div class="card room noxious-blooms"></div>
+          <div class="card room hidden-door-3"></div>
+          <div class="card room hall-of-echos"></div>
+          <div class="card room dark-storeroome"></div>
+          <div class="card room steep-chasm"></div>
+
+          <div class="card room mystic-portal"></div>
+          <div class="card room grand-hall"></div>
+          <div class="card room hidden-door-4"></div>
+          <div class="card room peculiar-shop"></div>
+          <div class="card room carnivorous-plant"></div>
+          <div class="card room snake-pit"></div>
+          <div class="card room pit-of-darkness"></div>
+
+          <div class="card misc arrows"></div>
+          <div class="card misc fruits"></div>
+          <div class="card misc poison"></div>
+          <div class="card misc amulet"></div>
+        </div>
       </div>
 
-      <div class="stack face-down">
-        <div class="card room pit-of-darkness"></div>
-      </div>
+      <footer>
+      </footer>
 
-      <div class="stack face-down characters">
-        <div class="card character wrestler"></div>
-        <div class="card character scholar"></div>
-        <div class="card character merchant"></div>
-
-        <div class="card character amazon"></div>
-        <div class="card character thief"></div>
-        <div class="card character merchant"></div>
-
-        <div class="card character hobbit"></div>
-        <div class="card character miner"></div>
-        <div class="card character monk"></div>
-
-        <div class="card character ranger"></div>
-        <div class="card character ninja"></div>
-        <div class="card character knight"></div>
-
-        <div class="card character elf"></div>
-        <div class="card character bard"></div>
-        <div class="card character brawler"></div>
-
-        <div class="card character gladiator"></div>
-        <div class="card character barbarian"></div>
-        <div class="card character dwarf"></div>
-      </div>
-
-      <div class="stack gold" data-gold-tens="" data-gold-ones="0">
-        <div class="card misc gold-5-9"></div>
-        <div class="card misc gold-10-30"></div>
-        <div class="card misc gold-40-70"></div>
-        <div class="card misc gold-0-4"></div>
-      </div>
-
-      <div class="stack level">
-        <div class="card misc level-1-4"></div>
-        <div class="card misc level-5-8"></div>
-      </div>
-
-      <div class="stack monsters">
-        <div class="card misc monster-frost"></div>
-        <div class="card misc monster-beast"></div>
-        <div class="card misc monster-undead"></div>
-        <div class="card misc monster-greenskin"></div>
-      </div>
-
-      <div class="card misc arrows"></div>
-      <div class="card misc fruits"></div>
-      <div class="card misc poison"></div>
-      <div class="card misc amulet"></div>
-
-      <div class="play-area">
-      </div>
-    </div>
+    </main>
   </body>
 </html>
