@@ -1,10 +1,12 @@
 $(function () {
 
-  var game = $('#game');
-  var cards  = game.find('.card');
-  var stacks = game.find('.stack');
+  var game     = $('#game');
+  var cards    = game.find('.card');
+  var stacks   = game.find('.stack');
+  var playArea = game.find('.play-area');
 
   var draggable;
+  var draggableGrabPos = {};
 
   var isTouchscreen = function () {
     return /iPad|iPhone|iPod|Android/.test(navigator.userAgent);
@@ -23,6 +25,8 @@ $(function () {
     if (!isTouchscreen()) {
       var x = originalEvent.layerX;
       var y = originalEvent.layerY;
+      draggableGrabPos.x = x;
+      draggableGrabPos.y = y;
       dataTransfer.setDragImage(draggable[0], x, y);
     }
   });
@@ -54,6 +58,23 @@ $(function () {
         draggable = null;
       }, 0);
     }
+  });
+
+  playArea.on('dragover', function (event) {
+    event.preventDefault();
+    event.originalEvent.dataTransfer.dropEffect = 'move';
+  });
+  playArea.on('drop', function (event) {
+    event.preventDefault();
+    setTimeout(function () {
+      var card = draggable.detach();
+      var originalEvent = event.originalEvent;
+      var x = originalEvent.layerX - draggableGrabPos.x;
+      var y = originalEvent.layerY - draggableGrabPos.y;
+      card.css({left: x, top: y});
+      playArea.append(card);
+      draggable = null;
+    }, 0);
   });
 
   game.on('click', '.card:not(.selected)', function (event) {

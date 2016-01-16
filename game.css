@@ -57,6 +57,10 @@ footer {
   background-color: #9bc2cf;
 }
 
+.play-area .card {
+  position: absolute;
+}
+
 .unused {
   display: none;
 }
