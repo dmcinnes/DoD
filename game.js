@@ -8,6 +8,8 @@ $(function () {
   var draggable;
   var draggableGrabPos = {};
 
+  var potentialRoomDrops = [];
+
   var isTouchscreen = function () {
     return /iPad|iPhone|iPod|Android/.test(navigator.userAgent);
   };
@@ -62,19 +64,43 @@ $(function () {
 
   playArea.on('dragover', function (event) {
     event.preventDefault();
-    event.originalEvent.dataTransfer.dropEffect = 'move';
+    if (draggable.is('.room')) {
+      event.originalEvent.dataTransfer.dropEffect = 'move';
+    }
   });
   playArea.on('drop', function (event) {
     event.preventDefault();
-    setTimeout(function () {
-      var card = draggable.detach();
-      var originalEvent = event.originalEvent;
-      var x = originalEvent.layerX - draggableGrabPos.x;
-      var y = originalEvent.layerY - draggableGrabPos.y;
-      card.css({left: x, top: y});
-      playArea.append(card);
-      draggable = null;
-    }, 0);
+    if (draggable.is('.room')) {
+      setTimeout(function () {
+        var card = draggable.detach();
+        var originalEvent = event.originalEvent;
+        var x = originalEvent.layerX - draggableGrabPos.x;
+        var y = originalEvent.layerY - draggableGrabPos.y;
+        if (potentialRoomDrops.length > 0) {
+          // find the closest
+          var dist = Number.MAX_VALUE;
+          var dropx = x;
+          var dropy = y;
+          for (var i=0; i < potentialRoomDrops.length; i++) {
+            var drop = potentialRoomDrops[i];
+            var left = x - drop.left;
+            var top  = y - drop.top;
+            var testDist = Math.sqrt(left*left + top*top);
+            if (testDist < dist) {
+              dist = testDist;
+              dropx = drop.left;
+              dropy = drop.top;
+            }
+          }
+          x = dropx;
+          y = dropy;
+        }
+        card.css({left: x, top: y});
+        playArea.append(card);
+        draggable = null;
+        updatePotentialRoomDrops();
+      }, 0);
+    }
   });
 
   game.on('click', '.card:not(.selected)', function (event) {
@@ -106,6 +132,51 @@ $(function () {
   GameKeys.registerKeyDownHandler('down', function () {
     updateGold(-1);
   });
+
+  var updatePotentialRoomDrops = function () {
+    potentialRoomDrops = [];
+    var rooms = playArea.find('.room');
+    if (rooms.length == 0) {
+      return;
+    }
+
+    var takenDrops = [];
+    // reversed because they're rotated
+    var width  = rooms.first().height();
+    var height = rooms.first().width();
+    rooms.each(function (i, room) {
+      var pos = $(room).position();
+      takenDrops.push(pos);
+      potentialRoomDrops.push({
+        left: pos.left - width,
+        top:  pos.top
+      });
+      potentialRoomDrops.push({
+        left: pos.left + width,
+        top:  pos.top
+      });
+      potentialRoomDrops.push({
+        left: pos.left,
+        top:  pos.top - height
+      });
+      potentialRoomDrops.push({
+        left: pos.left,
+        top:  pos.top + height
+      });
+    });
+
+    // remove the taken spaces
+    potentialRoomDrops =
+      $.grep(potentialRoomDrops, function (drop, i) {
+        for (var j = 0; j < takenDrops.length; j++) {
+          if (takenDrops[j].left === drop.left &&
+              takenDrops[j].top  === drop.top) {
+            return false;
+          }
+        }
+        return true;
+      });
+  };
 
   var selectCard = function (card) {
     var selected = card.hasClass('selected');
@@ -216,7 +287,7 @@ $(function () {
     var unusedRooms = $('.unused.rooms');
     var roomStack = $('.stack.rooms');
     // move all rooms back to the unused rooms pile and shuffle
-    $('.room').appendTo(unusedRooms);
+    $('.room').appendTo(unusedRooms).css({top:0, left:0});
     shuffle(unusedRooms);
     var roomCount = 8;
     // if we're on level 8 we need the pit of darkness
