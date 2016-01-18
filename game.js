@@ -32,28 +32,33 @@ $(function () {
       dataTransfer.setDragImage(draggable[0], x, y);
     }
   });
-  stacks.on('dragover', function (event) {
+
+  var droppableStacks = stacks.not('.non-drop');
+
+  droppableStacks.on('dragover', function (event) {
     event.preventDefault();
     event.originalEvent.dataTransfer.dropEffect = 'move';
   });
-  stacks.on('dragenter', function (event) {
+  droppableStacks.on('dragenter', function (event) {
     var stack = $(this);
     var limit = stack.data('limit');
-    if (stack.children('.card').length < limit) {
+    if (!limit ||
+        stack.children('.card').length < parseInt(limit, 10)) {
       stack.addClass('stack-hover');
     }
   });
-  stacks.on('dragleave', function (event) {
+  droppableStacks.on('dragleave', function (event) {
     $(this).removeClass('stack-hover');
   });
-  stacks.on('dragend', function (event) {
+  droppableStacks.on('dragend', function (event) {
     game.find('.stack').removeClass('stack-hover');
   });
-  stacks.on('drop', function (event) {
+  droppableStacks.on('drop', function (event) {
     event.preventDefault();
     var stack = $(this);
     var limit = stack.data('limit');
-    if (stack.children('.card').length < limit) {
+    if (!limit ||
+        stack.children('.card').length < parseInt(limit, 10)) {
       setTimeout(function () {
         var card = draggable.detach();
         stack.append(card);
