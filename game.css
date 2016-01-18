@@ -38,11 +38,13 @@ footer {
   float: left;
   width: 50%;
   height: 100%;
+  margin-top: 20px;
 }
 
 .right-area {
   float: left;
   width: 50%;
+  margin-top: 20px;
 }
 
 .right-area section {
@@ -66,6 +68,7 @@ footer {
 }
 
 .stack {
+  position: relative;
   display: inline-block;
   width: 79px;
   height: 110px;
@@ -73,6 +76,16 @@ footer {
   border: solid black 3px;
   margin: 5px;
   padding: 2px;
+}
+
+.stack:before {
+  content: attr(title);
+  position: absolute;
+  top : -1.2em;
+  width: 100%;
+  display: inline;
+  text-align: center;
+  font-variant: small-caps;
 }
 
 .stack .card {
@@ -104,8 +117,13 @@ footer {
   height: 79px;
 }
 
+.stack.other {
+  margin-left: 20px;
+}
+
 .player-hand {
   width: 500px;
+  margin-top: 10px;
 }
 
 .player-hand .stack {
@@ -297,8 +315,8 @@ footer {
 .card.misc.monster-frost     { background-position:  -79px -445px; }
 .card.misc.monster-undead    { background-position: -158px -445px; }
 
-.card.misc.arrows { background-position: -158px  -556px; }
-.card.misc.fruits { background-position:  -79px  -556px; }
+.card.misc.arrows { background-position:  -79px  -556px; }
+.card.misc.fruits { background-position: -158px  -556px; }
 .card.misc.poison { background-position:    0px -1000px; }
 .card.misc.amulet { background-position: -158px  -223px; }
 
