@@ -333,6 +333,27 @@ footer {
 .card.misc.poison:after { background-position: -79px -1000px; }
 .card.misc.amulet:after { background-position: -79px  -223px; }
 
+.card.misc.upgrade-str { background-position:    0px  0px; }
+.card.misc.upgrade-int { background-position:  -79px  0px; }
+.card.misc.upgrade-agl { background-position: -158px  0px; }
+
+.card.misc.upgrade[data-upgrade='2'],
+.card.misc.upgrade[data-upgrade='4'] {
+  transform: rotate( 180deg );
+}
+.card.misc.upgrade-str[data-upgrade='3'],
+.card.misc.upgrade-str[data-upgrade='4'] {
+  background-position: 0px -223px;
+}
+.card.misc.upgrade-int[data-upgrade='3'],
+.card.misc.upgrade-int[data-upgrade='4'] {
+  background-position: -79px -112px;
+}
+.card.misc.upgrade-agl[data-upgrade='3'],
+.card.misc.upgrade-agl[data-upgrade='4'] {
+  background-position: 0px -112px;
+}
+
 .stack.gold {
   position: relative;
   border: none;
