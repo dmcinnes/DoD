@@ -130,6 +130,33 @@ footer {
   margin: 0px;
 }
 
+.player-character {
+}
+
+.player-character .upgrade {
+  position: absolute;
+  display: block;
+}
+
+.player-character .character {
+  z-index: 5;
+}
+
+.player-character .upgrade:nth-child(1) {
+  margin-left: -16px;
+  z-index: 3;
+}
+
+.player-character .upgrade:nth-child(2) {
+  margin-left: -32px;
+  z-index: 2;
+}
+
+.player-character .upgrade:nth-child(3) {
+  margin-left: -48px;
+  z-index: 1;
+}
+
 .card {
   transform-style: preserve-3d;
   display: inline-block;
