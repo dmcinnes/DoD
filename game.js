@@ -255,7 +255,7 @@ $(function () {
   };
 
   var shuffle = function (stack) {
-    var cards = stack.children();
+    var cards = stack.children('.card');
     while (cards.length) {
       stack.append(cards.splice(Math.floor(Math.random() * cards.length), 1)[0]);
     }
@@ -276,7 +276,7 @@ $(function () {
     $('.card.power').appendTo('.stack.powers');
     shuffle($('.stack.powers'));
 
-    var powers = $('.stack.powers').children();
+    var powers = $('.stack.powers').children('.card.power');
     var handStacks = $('.player-hand').children();
     for (var i=0; i < 9; i++) {
       powers.eq(i).appendTo(handStacks.eq(i));
@@ -314,6 +314,14 @@ $(function () {
   };
 
   startGame();
+
+  $('input#shuffle').on('click', function (e) {
+    e.preventDefault();
+    // move all power cards from the discard back to the deck
+    $('.stack.discard .card.power').appendTo('.stack.powers');
+    // shuffle
+    shuffle($('.stack.powers'));
+  });
 
   $('input#next-level').on('click', function (e) {
     e.preventDefault();
