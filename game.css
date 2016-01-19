@@ -63,7 +63,11 @@ footer {
   position: absolute;
 }
 
-.unused {
+.unused-rooms {
+  display: none;
+}
+
+.unused-random {
   display: none;
 }
 
@@ -133,28 +137,41 @@ footer {
 .player-character {
 }
 
-.player-character .upgrade {
+.player-character .card {
   position: absolute;
   display: block;
 }
 
+.player-character .upgrade {
+}
+
 .player-character .character {
-  z-index: 5;
+  z-index: 15;
 }
 
-.player-character .upgrade:nth-child(1) {
+.player-character .poison {
+  margin-top: -16px;
+  z-index: 10;
+}
+
+.player-character aside:nth-of-type(1) {
   margin-left: -16px;
-  z-index: 3;
+  z-index: 13;
 }
 
-.player-character .upgrade:nth-child(2) {
+.player-character aside:nth-of-type(2) {
   margin-left: -32px;
-  z-index: 2;
+  z-index: 12;
 }
 
-.player-character .upgrade:nth-child(3) {
+.player-character aside:nth-of-type(3) {
   margin-left: -48px;
-  z-index: 1;
+  z-index: 11;
+}
+
+.player-character aside:nth-of-type(4) {
+  margin-left: -64px;
+  z-index: 10;
 }
 
 .card {

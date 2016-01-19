@@ -264,6 +264,9 @@ $(function () {
   var startGame = function () {
     $('#game').attr('data-level', 0);
 
+    // hide the amulet
+    $('.amulet').appendTo('.unused-random');
+
     // put all the character cards back in place
     $('.card.character').appendTo('.stack.characters');
     shuffle($('.stack.characters'));
@@ -289,7 +292,7 @@ $(function () {
       return;
     }
     $('#game').attr('data-level', level);
-    var unusedRooms = $('.unused.rooms');
+    var unusedRooms = $('.unused-rooms');
     var roomStack = $('.stack.rooms');
     // move all rooms back to the unused rooms pile and shuffle
     $('.room').appendTo(unusedRooms).css({top:0, left:0});
@@ -299,6 +302,7 @@ $(function () {
     if (level == 8) {
       roomCount--;
       $('.room.pit-of-darkness').appendTo(roomStack);
+      $('.amulet').appendTo('.other');
     }
     // always need the mystic portal
     $('.room.mystic-portal').appendTo(roomStack);
