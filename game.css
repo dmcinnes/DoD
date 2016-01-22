@@ -137,9 +137,26 @@ footer {
   margin-left: 20px;
 }
 
+.power-play-area {
+  padding-top: 10px;
+  position: relative;
+  width: 460px;
+  margin: 0 auto;
+}
+
+.power-play-area .stack[title=Move],
+.power-play-area .stack[title=Wandering Montser] {
+  float: left;
+}
+
+.power-play-area .stack[title=Primary],
+.power-play-area .stack[title=Secondary] {
+  float: right;
+}
+
 .player-hand {
-  width: 500px;
-  margin-top: 10px;
+  width: 470px;
+  margin-top: 12px;
 }
 
 .player-hand .stack {
