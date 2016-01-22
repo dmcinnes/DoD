@@ -215,16 +215,17 @@ footer {
 }
 
 .card.selected {
-  position: fixed;
+  position: fixed !important;
   width: 390px;
   height: 550px;
-  top: 50%;
-  left: 50%;
+  top: 50% !important;
+  left: 50% !important;
   margin-left: -195px;
   margin-top: -275px;
   transition: 0.10s ease-out;
   border-radius: 45px;
   z-index: 100;
+  pointer-events: none;
 }
 
 .card.rot-90 {
