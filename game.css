@@ -156,14 +156,8 @@ footer {
   margin: 0 auto;
 }
 
-.power-play-area .stack[title=Move],
-.power-play-area .stack[title=Wandering Montser] {
-  float: left;
-}
-
-.power-play-area .stack[title=Primary],
-.power-play-area .stack[title=Secondary] {
-  float: right;
+.power-play-area .stack[title='First Effort'] {
+  margin-left: 54px;
 }
 
 .player-hand {
