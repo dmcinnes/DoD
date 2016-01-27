@@ -204,6 +204,19 @@ footer {
   z-index: 10;
 }
 
+.player-character .select-controls #upgrade-str {
+  top: 150px;
+  left: -110px;
+}
+.player-character .select-controls #upgrade-int {
+  top: 222px;
+  left: -130px;
+}
+.player-character .select-controls #upgrade-agl {
+  top: 294px;
+  left: -100px;
+}
+
 .card {
   transform-style: preserve-3d;
   display: inline-block;
@@ -244,6 +257,29 @@ footer {
   border-radius: 45px;
   z-index: 100;
   pointer-events: none;
+}
+
+.select-controls {
+  display: none;
+}
+.select-controls input {
+  display: block;
+  position: absolute;
+  top: auto;
+  left: auto;
+  transform: none;
+}
+
+.select-controls.selected {
+  display: block;
+  position: fixed !important;
+  width: 390px;
+  height: 550px;
+  top: 50% !important;
+  left: 50% !important;
+  margin-left: -195px;
+  margin-top: -275px;
+  z-index: 110;
 }
 
 .card.rot-90 {

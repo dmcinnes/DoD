@@ -98,9 +98,6 @@
           </div>
 
           <div class="stack inventory other" title="Other">
-            <aside class="card misc upgrade upgrade-str" data-upgrade="1"></aside>
-            <aside class="card misc upgrade upgrade-int" data-upgrade="1"></aside>
-            <aside class="card misc upgrade upgrade-agl" data-upgrade="1"></aside>
             <div class="card misc poison"></div>
             <div class="card misc arrows"></div>
           </div>
@@ -128,6 +125,11 @@
 
         <section>
           <div class="stack player-character" title="Character">
+            <div class="select-controls">
+              <input id="upgrade-str" type="button" value="Upgrade Strength"/>
+              <input id="upgrade-int" type="button" value="Upgrade Intellegence"/>
+              <input id="upgrade-agl" type="button" value="Upgrade Agility"/>
+            </div>
           </div>
 
           <div class="stack gold non-drop" data-gold-tens="" data-gold-ones="0">
@@ -170,6 +172,9 @@
 
         <div class="unused-random">
           <aside class="card misc amulet"></aside>
+          <aside class="card misc upgrade upgrade-str" data-upgrade="0"></aside>
+          <aside class="card misc upgrade upgrade-int" data-upgrade="0"></aside>
+          <aside class="card misc upgrade upgrade-agl" data-upgrade="0"></aside>
         </div>
       </div>
     </main>

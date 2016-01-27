@@ -197,6 +197,7 @@ $(function () {
         backgroundSize:     bgLeft    + 'px ' + bgTop    + 'px',
         backgroundPosition: bgPosLeft + 'px ' + bgPosTop + 'px'
       });
+      card.siblings('.select-controls').addClass('selected');
     }
   };
 
@@ -206,6 +207,7 @@ $(function () {
         backgroundSize:     '',
         backgroundPosition: ''
       });
+    game.find('.select-controls').removeClass('selected');
   };
 
   var updateGold = function (increment) {
@@ -313,6 +315,15 @@ $(function () {
     shuffle(roomStack);
   };
 
+  var upgradeCharacter = function (attribute) {
+    var card = $('.card.upgrade-'+attribute);
+    card.appendTo('.stack.player-character');
+    var plus = parseInt(card.attr('data-upgrade'), 10);
+    if (plus < 4) {
+      card.attr('data-upgrade', plus + 1);
+    }
+  };
+
   startGame();
 
   $('input#shuffle').on('click', function (e) {
@@ -336,6 +347,13 @@ $(function () {
   $('input#gold-down').on('click', function (e) {
     e.preventDefault();
     updateGold(-1);
+  });
+
+  $.each(['str', 'int', 'agl'], function (_, attribute) {
+    $('input#upgrade-'+attribute).on('click', function (e) {
+      e.preventDefault();
+      upgradeCharacter(attribute);
+    });
   });
 
 });
