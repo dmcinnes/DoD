@@ -21,6 +21,8 @@ $(function () {
 
   cards.on('dragstart', function (event) {
     draggable = $(this);
+    draggable.addClass('being-dragged');
+    game.addClass('drag-in-progress');
     var originalEvent = event.originalEvent;
     var dataTransfer = originalEvent.dataTransfer;
     dataTransfer.effectAllowed = 'move';
@@ -42,8 +44,7 @@ $(function () {
   droppableStacks.on('dragenter', function (event) {
     var stack = $(this);
     var limit = stack.data('limit');
-    if (!limit ||
-        stack.children('.card').length < parseInt(limit, 10)) {
+    if (stackLimitNotReached(stack)) {
       stack.addClass('stack-hover');
     }
   });
@@ -51,14 +52,15 @@ $(function () {
     $(this).removeClass('stack-hover');
   });
   droppableStacks.on('dragend', function (event) {
+    game.removeClass('drag-in-progress');
+    $('.being-dragged').removeClass('being-dragged');
     game.find('.stack').removeClass('stack-hover');
   });
   droppableStacks.on('drop', function (event) {
     event.preventDefault();
     var stack = $(this);
     var limit = stack.data('limit');
-    if (!limit ||
-        stack.children('.card').length < parseInt(limit, 10)) {
+    if (stackLimitNotReached(stack)) {
       setTimeout(function () {
         var card = draggable.detach();
         stack.append(card);
@@ -137,6 +139,12 @@ $(function () {
   GameKeys.registerKeyDownHandler('down', function () {
     updateGold(-1);
   });
+
+  var stackLimitNotReached = function (stack) {
+    var limit = stack.data('limit');
+    return (limit === undefined ||
+      stack.children('.card').length < parseInt(limit, 10));
+  };
 
   var updatePotentialRoomDrops = function () {
     potentialRoomDrops = [];

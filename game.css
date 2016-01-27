@@ -33,6 +33,10 @@ footer {
   overflow: hidden;
 }
 
+.drag-in-progress .stack :not(.being-dragged) {
+  pointer-events: none;
+}
+
 .left-area {
   position: relative;
   float: left;
