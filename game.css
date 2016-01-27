@@ -120,7 +120,7 @@ footer {
   border: solid yellow 3px;
 }
 
-.stack :not(.card) {
+.stack input, .stack span {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -128,7 +128,8 @@ footer {
   display: none;
 }
 
-.stack :not(.card):last-child {
+.stack input:last-child,
+.stack span:last-child {
   display: block;
 }
 
