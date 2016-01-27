@@ -152,12 +152,17 @@ footer {
 .power-play-area {
   padding-top: 10px;
   position: relative;
-  width: 460px;
+  width: 470px;
   margin: 0 auto;
 }
 
-.power-play-area .stack[title='First Effort'] {
-  margin-left: 54px;
+.power-play-area .stack {
+  margin: 4px;
+}
+
+.power-play-area #discard-power-play {
+  position: relative;
+  top: -60px;
 }
 
 .player-hand {

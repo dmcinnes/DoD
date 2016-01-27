@@ -373,4 +373,9 @@ $(function () {
     $('.room.selected').addClass('exhausted');
   });
 
+  $('input#discard-power-play').on('click', function (e) {
+    e.preventDefault();
+    $('.power-play-area .card').appendTo('.discard');
+  });
+
 });
