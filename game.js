@@ -309,7 +309,10 @@ $(function () {
     var unusedRooms = $('.unused-rooms');
     var roomStack = $('.stack.rooms');
     // move all rooms back to the unused rooms pile and shuffle
-    $('.room').appendTo(unusedRooms).css({top:0, left:0});
+    $('.room')
+      .appendTo(unusedRooms)
+      .css({top:0, left:0})
+      .removeClass('exhausted');
     shuffle(unusedRooms);
     var roomCount = 8;
     // if we're on level 8 we need the pit of darkness
