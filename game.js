@@ -75,6 +75,10 @@ $(function () {
       event.originalEvent.dataTransfer.dropEffect = 'move';
     }
   });
+  playArea.on('dragend', function (event) {
+    game.removeClass('drag-in-progress');
+    $('.being-dragged').removeClass('being-dragged');
+  });
   playArea.on('drop', function (event) {
     event.preventDefault();
     if (draggable.is('.room')) {
