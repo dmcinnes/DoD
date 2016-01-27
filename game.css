@@ -87,6 +87,7 @@ footer {
   border: solid black 3px;
   margin: 5px;
   padding: 2px;
+  font-variant: small-caps;
 }
 
 .stack:before {
@@ -115,7 +116,7 @@ footer {
   border: solid yellow 3px;
 }
 
-.stack input {
+.stack :not(.card) {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -123,7 +124,7 @@ footer {
   display: none;
 }
 
-.stack input:last-child {
+.stack :not(.card):last-child {
   display: block;
 }
 
