@@ -64,6 +64,12 @@ footer {
   position: absolute;
 }
 
+.play-area .select-controls #exhaust-room {
+  bottom: 40px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .unused-rooms {
   display: none;
 }
@@ -313,6 +319,10 @@ footer {
   background-image: url(cards/rooms.png);
   background-size: 555px 332px;
   background-position: -476px 0px;
+}
+
+.card.room.exhausted {
+  transform: translate(16px, -16px) rotate( -90deg );
 }
 
 .card.character {

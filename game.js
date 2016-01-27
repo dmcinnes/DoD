@@ -356,4 +356,9 @@ $(function () {
     });
   });
 
+  $('input#exhaust-room').on('click', function (e) {
+    e.preventDefault();
+    $('.room.selected').addClass('exhausted');
+  });
+
 });
