@@ -328,4 +328,14 @@ $(function () {
     nextLevel();
   });
 
+  $('input#gold-up').on('click', function (e) {
+    e.preventDefault();
+    updateGold(+1);
+  });
+
+  $('input#gold-down').on('click', function (e) {
+    e.preventDefault();
+    updateGold(-1);
+  });
+
 });
