@@ -309,6 +309,10 @@ input[type=button]:active {
   pointer-events: none;
 }
 
+.card.selected:after {
+  border-radius: 45px;
+}
+
 .select-controls {
   display: none;
 }
@@ -354,6 +358,10 @@ input[type=button]:active {
   background-size: 236px 779px;
   background-position: -158px -668px;
 }
+.card.power.selected:after {
+  background-size: 1180px 3895px;
+  background-position: -790px -3340px;
+}
 
 .card.room {
   transform: translate(16px, -16px) rotate( 90deg );
@@ -364,6 +372,10 @@ input[type=button]:active {
   background-image: url(cards/rooms.png);
   background-size: 555px 332px;
   background-position: -476px 0px;
+}
+.card.room.selected:after {
+  background-size: 2775px 1660px;
+  background-position: -2380px 0px;
 }
 
 .card.room.exhausted {
@@ -378,6 +390,10 @@ input[type=button]:active {
   background-image: url(cards/characters.png);
   background-size: 236px 779px;
   background-position: 0px -668px;
+}
+.card.character.selected:after {
+  background-size: 1180px 3895px;
+  background-position: 0px -3340px;
 }
 
 .card.misc {

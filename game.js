@@ -117,11 +117,9 @@ $(function () {
 
   game.on('click', '.card:not(.selected)', function (event) {
     var card = $(this);
-    if (card.closest('.face-down').length == 0) {
-      event.stopPropagation();
-      unselectCards();
-      selectCard($(this));
-    }
+    event.stopPropagation();
+    unselectCards();
+    selectCard(card);
   });
 
   game.on('click', function (event) {
@@ -210,6 +208,7 @@ $(function () {
         backgroundSize:     bgLeft    + 'px ' + bgTop    + 'px',
         backgroundPosition: bgPosLeft + 'px ' + bgPosTop + 'px'
       });
+
       card.siblings('.select-controls').addClass('selected');
     }
   };
