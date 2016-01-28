@@ -65,6 +65,7 @@ $(function () {
         var card = draggable.detach();
         stack.append(card);
         draggable = null;
+        stack.trigger('card-drop', [card]);
       }, 0);
     }
   });
@@ -339,7 +340,19 @@ $(function () {
     }
   };
 
-  startGame();
+  // Custom stack card-drop events
+
+  $('.inventory').on('card-drop', function (e, card) {
+    if (card.hasClass('power')) {
+      card.addClass('face-down');
+    }
+  });
+
+  $('.discard').on('card-drop', function (e, card) {
+    card.removeClass('face-down rot-90 rot-180 rot-270');
+  });
+
+  // Button Clicks
 
   $('input#shuffle').on('click', function (e) {
     e.preventDefault();
@@ -398,5 +411,7 @@ $(function () {
     e.stopPropagation();
     $('.card.selected').removeClass('face-down');
   });
+
+  startGame();
 
 });
