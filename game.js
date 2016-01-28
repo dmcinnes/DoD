@@ -381,4 +381,22 @@ $(function () {
     $('.power-play-area .card').appendTo('.discard');
   });
 
+  $('input#rotate-left').on('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    rotateSelectedCard(-1);
+  });
+
+  $('input#rotate-right').on('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    rotateSelectedCard(+1);
+  });
+
+  $('input#reveal').on('click', function (e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $('.card.selected').removeClass('face-down');
+  });
+
 });

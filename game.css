@@ -22,6 +22,25 @@ footer {
   background: lightblue;
 }
 
+input[type=button] {
+  -webkit-appearance: none;
+  font-size: 0.8em;
+  border : solid 2px #ffffff;
+  border-radius : 7px;
+  color : #ffffff;
+  padding : 2px 5px;
+  background-color : #0a66c9;
+  outline: none;
+}
+
+input[type=button]:hover {
+  background-color : #1b77da;
+}
+
+input[type=button]:active {
+  background-color : #3d99fc;
+}
+
 [draggable] {
   user-select: none;
 }
@@ -139,6 +158,26 @@ footer {
 .stack.inventory .card {
   display: block;
   margin-bottom: -90px;
+}
+
+.stack.inventory .select-controls #rotate-left {
+  top: 50%;
+  left: -40px;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.stack.inventory .select-controls #rotate-right {
+  top: 50%;
+  right: -40px;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.stack.inventory .select-controls #reveal {
+  left: 50%;
+  bottom: 20px;
+  transform: translate(-50%, -50%);
 }
 
 .stack.rooms {
@@ -274,6 +313,7 @@ footer {
   display: none;
 }
 .select-controls input {
+  font-size: 1.0em;
   display: block;
   position: absolute;
   top: auto;
