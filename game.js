@@ -115,6 +115,27 @@ $(function () {
     }
   });
 
+  // simulate clicks on touch screens
+
+  var touchTarget;
+  var touchStartTime;
+
+  game.on('touchstart', function (event) {
+    var originalEvent = event.originalEvent;
+    touchTarget = originalEvent.target;
+    touchStartTime = originalEvent.timeStamp;
+  });
+
+  game.on('touchend', function (event) {
+    var originalEvent = event.originalEvent;
+    if (originalEvent.target === touchTarget &&
+        originalEvent.timeStamp - touchStartTime < 600) { // millis
+      $(touchTarget).trigger('click');
+    }
+    touchTarget = null;
+    touchStartTime = null;
+  });
+
   game.on('click', '.card:not(.selected)', function (event) {
     var card = $(this);
     event.stopPropagation();
