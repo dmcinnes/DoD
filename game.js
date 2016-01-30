@@ -34,6 +34,11 @@ $(function () {
       dataTransfer.setDragImage(draggable[0], x, y);
     }
   });
+  game.on('dragend', function (event) {
+    game.removeClass('drag-in-progress');
+    $('.being-dragged').removeClass('being-dragged');
+    game.find('.stack').removeClass('stack-hover');
+  });
 
   var droppableStacks = stacks.not('.non-drop');
 
@@ -50,11 +55,6 @@ $(function () {
   });
   droppableStacks.on('dragleave', function (event) {
     $(this).removeClass('stack-hover');
-  });
-  droppableStacks.on('dragend', function (event) {
-    game.removeClass('drag-in-progress');
-    $('.being-dragged').removeClass('being-dragged');
-    game.find('.stack').removeClass('stack-hover');
   });
   droppableStacks.on('drop', function (event) {
     event.preventDefault();
@@ -75,10 +75,6 @@ $(function () {
     if (draggable.is('.room')) {
       event.originalEvent.dataTransfer.dropEffect = 'move';
     }
-  });
-  playArea.on('dragend', function (event) {
-    game.removeClass('drag-in-progress');
-    $('.being-dragged').removeClass('being-dragged');
   });
   playArea.on('drop', function (event) {
     event.preventDefault();
