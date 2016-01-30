@@ -59,15 +59,10 @@ $(function () {
   droppableStacks.on('drop', function (event) {
     event.preventDefault();
     var stack = $(this);
-    var limit = stack.data('limit');
-    if (stackLimitNotReached(stack)) {
-      setTimeout(function () {
-        var card = draggable.detach();
-        stack.append(card);
-        draggable = null;
-        stack.trigger('card-drop', [card]);
-      }, 0);
-    }
+    setTimeout(function () {
+      moveCardToStack(draggable, stack);
+      draggable = null;
+    }, 0);
   });
 
   playArea.on('dragover', function (event) {
@@ -162,8 +157,7 @@ $(function () {
 
   var stackLimitNotReached = function (stack) {
     var limit = stack.data('limit');
-    return (limit === undefined ||
-      stack.children('.card').length < parseInt(limit, 10));
+    return (limit === undefined || parseInt(limit, 10) > 0);
   };
 
   var updatePotentialRoomDrops = function () {
@@ -285,6 +279,25 @@ $(function () {
     }
   };
 
+  var moveCardToStack = function (card, stack) {
+    if (stackLimitNotReached(stack)) {
+      var limit = stack.data('limit');
+      if (limit !== undefined) {
+        stack.data('limit', parseInt(limit, 10) - 1);
+      }
+
+      var fromStack = card.closest('.stack');
+      var fromLimit = fromStack.data('limit');
+      if (fromLimit !== undefined) {
+        fromStack.data('limit', parseInt(fromLimit, 10) + 1);
+      }
+
+      card.detach();
+      stack.append(card);
+      stack.trigger('card-drop', [card]);
+    }
+  };
+
   var shuffle = function (stack) {
     var cards = stack.children('.card');
     while (cards.length) {
@@ -310,7 +323,7 @@ $(function () {
     var powers = $('.stack.powers').children('.card.power');
     var handStacks = $('.player-hand').children();
     for (var i=0; i < 9; i++) {
-      powers.eq(i).appendTo(handStacks.eq(i));
+      moveCardToStack(powers.eq(i), handStacks.eq(i));
     }
 
     nextLevel();
