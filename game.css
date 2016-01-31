@@ -49,7 +49,6 @@ input[type=button]:active {
   box-sizing: border-box;
   height:100%;
   margin-bottom: -100px;
-  overflow: hidden;
 }
 
 .drag-in-progress .stack :not(.being-dragged) {
@@ -231,7 +230,28 @@ input[type=button]:active {
 }
 
 .player-character .poison {
-  margin-top: -16px;
+  margin-top: -16px !important;
+  z-index: 10;
+}
+
+.player-character div:nth-of-type(3) {
+  margin-top: 40px;
+  z-index: 14;
+}
+.player-character div:nth-of-type(4) {
+  margin-top: 80px;
+  z-index: 13;
+}
+.player-character div:nth-of-type(5) {
+  margin-top: 120px;
+  z-index: 12;
+}
+.player-character div:nth-of-type(6) {
+  margin-top: 160px;
+  z-index: 11;
+}
+.player-character div:nth-of-type(7) {
+  margin-top: 200px;
   z-index: 10;
 }
 
@@ -239,17 +259,14 @@ input[type=button]:active {
   margin-left: -16px;
   z-index: 13;
 }
-
 .player-character aside:nth-of-type(2) {
   margin-left: -32px;
   z-index: 12;
 }
-
 .player-character aside:nth-of-type(3) {
   margin-left: -48px;
   z-index: 11;
 }
-
 .player-character aside:nth-of-type(4) {
   margin-left: -64px;
   z-index: 10;
@@ -303,11 +320,11 @@ input[type=button]:active {
   height: 550px;
   top: 50% !important;
   left: 50% !important;
-  margin-left: -195px;
-  margin-top: -275px;
+  margin-left: -195px !important;
+  margin-top: -275px !important;
   transition: 0.10s ease-out;
   border-radius: 45px;
-  z-index: 100;
+  z-index: 100 !important;
   pointer-events: none;
 }
 
