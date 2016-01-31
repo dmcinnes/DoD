@@ -77,8 +77,11 @@ $(function () {
       setTimeout(function () {
         var card = draggable.detach();
         var originalEvent = event.originalEvent;
-        var x = originalEvent.layerX - draggableGrabPos.x;
-        var y = originalEvent.layerY - draggableGrabPos.y;
+        // some magic numbers that look right on an iPad drop
+        var cardX = draggableGrabPos.x || 39;
+        var cardY = draggableGrabPos.y || 55;
+        var x = originalEvent.offsetX - cardX;
+        var y = originalEvent.offsetY - cardY;
         if (potentialRoomDrops.length > 0) {
           // find the closest
           var dist = Number.MAX_VALUE;
@@ -358,6 +361,7 @@ $(function () {
       rooms.eq(i).appendTo(roomStack);
     }
     shuffle(roomStack);
+    potentialRoomDrops = [];
   };
 
   var upgradeCharacter = function (attribute) {
