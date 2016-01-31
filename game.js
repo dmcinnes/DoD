@@ -1,9 +1,6 @@
 $(function () {
 
-  var game     = $('#game');
-  var cards    = game.find('.card');
-  var stacks   = game.find('.stack');
-  var playArea = game.find('.play-area');
+  var game, cards, stacks, playArea;
 
   var draggable;
   var draggableGrabPos = {};
@@ -14,149 +11,18 @@ $(function () {
     return /iPad|iPhone|iPod|Android/.test(navigator.userAgent);
   };
 
-  // set all non misc cards to draggable
-  cards.not('.misc').attr('draggable', 'true');
-  // fruits, arrows, poison and amulet are also draggable
-  cards.filter('.fruits,.arrows,.poison,.amulet').attr('draggable', 'true');
+  // cache all the things
+  var updateGameSelectors = function () {
+    game     = $('#game');
+    cards    = game.find('.card');
+    stacks   = game.find('.stack');
+    playArea = game.find('.play-area');
 
-  cards.on('dragstart', function (event) {
-    draggable = $(this);
-    draggable.addClass('being-dragged');
-    game.addClass('drag-in-progress');
-    var originalEvent = event.originalEvent;
-    var dataTransfer = originalEvent.dataTransfer;
-    dataTransfer.effectAllowed = 'move';
-    if (!isTouchscreen()) {
-      var x = originalEvent.layerX;
-      var y = originalEvent.layerY;
-      draggableGrabPos.x = x;
-      draggableGrabPos.y = y;
-      dataTransfer.setDragImage(draggable[0], x, y);
-    }
-  });
-  game.on('dragend', function (event) {
-    game.removeClass('drag-in-progress');
-    $('.being-dragged').removeClass('being-dragged');
-    game.find('.stack').removeClass('stack-hover');
-  });
-
-  var droppableStacks = stacks.not('.non-drop');
-
-  droppableStacks.on('dragover', function (event) {
-    event.preventDefault();
-    event.originalEvent.dataTransfer.dropEffect = 'move';
-  });
-  droppableStacks.on('dragenter', function (event) {
-    var stack = $(this);
-    var limit = stack.data('limit');
-    if (stackLimitNotReached(stack)) {
-      stack.addClass('stack-hover');
-    }
-  });
-  droppableStacks.on('dragleave', function (event) {
-    $(this).removeClass('stack-hover');
-  });
-  droppableStacks.on('drop', function (event) {
-    event.preventDefault();
-    var stack = $(this);
-    setTimeout(function () {
-      moveCardToStack(draggable, stack);
-      draggable = null;
-    }, 0);
-  });
-
-  playArea.on('dragover', function (event) {
-    event.preventDefault();
-    if (draggable.is('.room')) {
-      event.originalEvent.dataTransfer.dropEffect = 'move';
-    }
-  });
-  playArea.on('drop', function (event) {
-    event.preventDefault();
-    if (draggable.is('.room')) {
-      setTimeout(function () {
-        var card = draggable.detach();
-        var originalEvent = event.originalEvent;
-        // some magic numbers that look right on an iPad drop
-        var cardX = draggableGrabPos.x || 39;
-        var cardY = draggableGrabPos.y || 55;
-        var x = originalEvent.offsetX - cardX;
-        var y = originalEvent.offsetY - cardY;
-        if (potentialRoomDrops.length > 0) {
-          // find the closest
-          var dist = Number.MAX_VALUE;
-          var dropx = x;
-          var dropy = y;
-          for (var i=0; i < potentialRoomDrops.length; i++) {
-            var drop = potentialRoomDrops[i];
-            var left = x - drop.left;
-            var top  = y - drop.top;
-            var testDist = Math.sqrt(left*left + top*top);
-            if (testDist < dist) {
-              dist = testDist;
-              dropx = drop.left;
-              dropy = drop.top;
-            }
-          }
-          x = dropx;
-          y = dropy;
-        }
-        card.css({left: x, top: y});
-        playArea.append(card);
-        draggable = null;
-        updatePotentialRoomDrops();
-      }, 0);
-    }
-  });
-
-  // simulate clicks on touch screens
-
-  var touchTarget;
-  var touchStartTime;
-
-  game.on('touchstart', function (event) {
-    var originalEvent = event.originalEvent;
-    touchTarget = originalEvent.target;
-    touchStartTime = originalEvent.timeStamp;
-  });
-
-  game.on('touchend', function (event) {
-    var originalEvent = event.originalEvent;
-    if (originalEvent.target === touchTarget &&
-        originalEvent.timeStamp - touchStartTime < 600) { // millis
-      $(touchTarget).trigger('click');
-    }
-    touchTarget = null;
-    touchStartTime = null;
-  });
-
-  game.on('click', '.card:not(.selected)', function (event) {
-    var card = $(this);
-    event.stopPropagation();
-    unselectCards();
-    selectCard(card);
-  });
-
-  game.on('click', function (event) {
-    event.preventDefault();
-    unselectCards();
-  });
-
-  GameKeys.registerKeyDownHandler('left', function () {
-    rotateSelectedCard(-1);
-  });
-
-  GameKeys.registerKeyDownHandler('right', function () {
-    rotateSelectedCard(+1);
-  });
-
-  GameKeys.registerKeyDownHandler('up', function () {
-    updateGold(+1);
-  });
-
-  GameKeys.registerKeyDownHandler('down', function () {
-    updateGold(-1);
-  });
+    // set all non misc cards to draggable
+    cards.not('.misc').attr('draggable', 'true');
+    // fruits, arrows, poison and amulet are also draggable
+    cards.filter('.fruits,.arrows,.poison,.amulet').attr('draggable', 'true');
+  };
 
   var stackLimitNotReached = function (stack) {
     var limit = stack.data('limit');
@@ -309,7 +175,9 @@ $(function () {
   };
 
   var startGame = function () {
-    $('#game').attr('data-level', 0);
+    updateGameSelectors();
+
+    game.attr('data-level', 0);
 
     // hide the amulet
     $('.amulet').appendTo('.unused-random');
@@ -330,6 +198,25 @@ $(function () {
     }
 
     nextLevel();
+  };
+
+  var setupGameSaveCallback = function () {
+    // save game after mutation events stop for a second
+    var saveGameTimeout = null;
+    var observer = new MutationObserver(function(mutations) {
+      if (saveGameTimeout) {
+        // already have one running, clear it
+        window.clearTimeout(saveGameTimeout);
+      }
+      saveGameTimeout = window.setTimeout(saveGame, 1000);
+    });
+
+    observer.observe(game[0], {
+      attributes:    true,
+      childList:     true,
+      subtree:       true,
+      attributeOldValue: true
+    });
   };
 
   var nextLevel = function () {
@@ -373,78 +260,248 @@ $(function () {
     }
   };
 
-  // Custom stack card-drop events
+  var saveGame = function () {
+    console.log('saveGame');
+    localStorage.game = game.html();
+    localStorage.gameLevel = game.attr('data-level');
+  };
 
-  $('.inventory').on('card-drop', function (e, card) {
-    if (card.hasClass('power')) {
-      card.addClass('face-down');
-    }
-  });
+  var loadGame = function () {
+    $('#game').html(localStorage.game);
+    $('#game').attr('data-level', localStorage.gameLevel);
+    updateGameSelectors();
+    updatePotentialRoomDrops();
+  };
 
-  $('.discard').on('card-drop', function (e, card) {
-    card.removeClass('face-down rot-90 rot-180 rot-270');
-  });
+  var setupEventHandlers = function () {
 
-  // Button Clicks
+    // card drag handling
 
-  $('input#shuffle').on('click', function (e) {
-    e.preventDefault();
-    // move all power cards from the discard back to the deck
-    $('.stack.discard .card.power').appendTo('.stack.powers');
-    // shuffle
-    shuffle($('.stack.powers'));
-  });
-
-  $('input#next-level').on('click', function (e) {
-    e.preventDefault();
-    nextLevel();
-  });
-
-  $('input#gold-up').on('click', function (e) {
-    e.preventDefault();
-    updateGold(+1);
-  });
-
-  $('input#gold-down').on('click', function (e) {
-    e.preventDefault();
-    updateGold(-1);
-  });
-
-  $.each(['str', 'int', 'agl'], function (_, attribute) {
-    $('input#upgrade-'+attribute).on('click', function (e) {
-      e.preventDefault();
-      upgradeCharacter(attribute);
+    cards.on('dragstart', function (event) {
+      draggable = $(this);
+      draggable.addClass('being-dragged');
+      game.addClass('drag-in-progress');
+      var originalEvent = event.originalEvent;
+      var dataTransfer = originalEvent.dataTransfer;
+      dataTransfer.effectAllowed = 'move';
+      if (!isTouchscreen()) {
+        var x = originalEvent.layerX;
+        var y = originalEvent.layerY;
+        draggableGrabPos.x = x;
+        draggableGrabPos.y = y;
+        dataTransfer.setDragImage(draggable[0], x, y);
+      }
     });
-  });
+    game.on('dragend', function (event) {
+      game.removeClass('drag-in-progress');
+      $('.being-dragged').removeClass('being-dragged');
+      game.find('.stack').removeClass('stack-hover');
+    });
 
-  $('input#exhaust-room').on('click', function (e) {
-    e.preventDefault();
-    $('.room.selected').addClass('exhausted');
-  });
+    // Stack drag-drop handling
 
-  $('input#discard-power-play').on('click', function (e) {
-    e.preventDefault();
-    $('.power-play-area .card').appendTo('.discard');
-  });
+    var droppableStacks = stacks.not('.non-drop');
 
-  $('input#rotate-left').on('click', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    rotateSelectedCard(-1);
-  });
+    droppableStacks.on('dragover', function (event) {
+      event.preventDefault();
+      event.originalEvent.dataTransfer.dropEffect = 'move';
+    });
+    droppableStacks.on('dragenter', function (event) {
+      var stack = $(this);
+      var limit = stack.data('limit');
+      if (stackLimitNotReached(stack)) {
+        stack.addClass('stack-hover');
+      }
+    });
+    droppableStacks.on('dragleave', function (event) {
+      $(this).removeClass('stack-hover');
+    });
+    droppableStacks.on('drop', function (event) {
+      event.preventDefault();
+      var stack = $(this);
+      setTimeout(function () {
+        moveCardToStack(draggable, stack);
+        draggable = null;
+      }, 0);
+    });
 
-  $('input#rotate-right').on('click', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    rotateSelectedCard(+1);
-  });
+    // Room Play Area drag/drop
 
-  $('input#reveal').on('click', function (e) {
-    e.preventDefault();
-    e.stopPropagation();
-    $('.card.selected').removeClass('face-down');
-  });
+    playArea.on('dragover', function (event) {
+      event.preventDefault();
+      if (draggable.is('.room')) {
+        event.originalEvent.dataTransfer.dropEffect = 'move';
+      }
+    });
+    playArea.on('drop', function (event) {
+      event.preventDefault();
+      if (draggable.is('.room')) {
+        setTimeout(function () {
+          var card = draggable.detach();
+          var originalEvent = event.originalEvent;
+          // some magic numbers that look right on an iPad drop
+          var cardX = draggableGrabPos.x || 39;
+          var cardY = draggableGrabPos.y || 55;
+          var x = originalEvent.offsetX - cardX;
+          var y = originalEvent.offsetY - cardY;
+          if (potentialRoomDrops.length > 0) {
+            // find the closest
+            var dist = Number.MAX_VALUE;
+            var dropx = x;
+            var dropy = y;
+            for (var i=0; i < potentialRoomDrops.length; i++) {
+              var drop = potentialRoomDrops[i];
+              var left = x - drop.left;
+              var top  = y - drop.top;
+              var testDist = Math.sqrt(left*left + top*top);
+              if (testDist < dist) {
+                dist = testDist;
+                dropx = drop.left;
+                dropy = drop.top;
+              }
+            }
+            x = dropx;
+            y = dropy;
+          }
+          card.css({left: x, top: y});
+          playArea.append(card);
+          draggable = null;
+          updatePotentialRoomDrops();
+        }, 0);
+      }
+    });
 
-  startGame();
+    // Card clicks
 
+    game.on('click', '.card:not(.selected)', function (event) {
+      var card = $(this);
+      event.stopPropagation();
+      unselectCards();
+      selectCard(card);
+    });
+
+    game.on('click', function (event) {
+      event.preventDefault();
+      unselectCards();
+    });
+
+    // Simulate clicks on touch screens
+
+    var touchTarget;
+    var touchStartTime;
+
+    game.on('touchstart', function (event) {
+      var originalEvent = event.originalEvent;
+      touchTarget = originalEvent.target;
+      touchStartTime = originalEvent.timeStamp;
+    });
+
+    game.on('touchend', function (event) {
+      var originalEvent = event.originalEvent;
+      if (originalEvent.target === touchTarget &&
+          originalEvent.timeStamp - touchStartTime < 600) { // millis
+        $(touchTarget).trigger('click');
+      }
+      touchTarget = null;
+      touchStartTime = null;
+    });
+
+    // Key Handlers
+
+    GameKeys.registerKeyDownHandler('left', function () {
+      rotateSelectedCard(-1);
+    });
+
+    GameKeys.registerKeyDownHandler('right', function () {
+      rotateSelectedCard(+1);
+    });
+
+    GameKeys.registerKeyDownHandler('up', function () {
+      updateGold(+1);
+    });
+
+    GameKeys.registerKeyDownHandler('down', function () {
+      updateGold(-1);
+    });
+
+    // Custom stack card-drop events
+
+    $('.inventory').on('card-drop', function (e, card) {
+      if (card.hasClass('power')) {
+        card.addClass('face-down');
+      }
+    });
+
+    $('.discard').on('card-drop', function (e, card) {
+      card.removeClass('face-down rot-90 rot-180 rot-270');
+    });
+
+    // Button Clicks
+
+    $('input#shuffle').on('click', function (e) {
+      e.preventDefault();
+      // move all power cards from the discard back to the deck
+      $('.stack.discard .card.power').appendTo('.stack.powers');
+      // shuffle
+      shuffle($('.stack.powers'));
+    });
+
+    $('input#next-level').on('click', function (e) {
+      e.preventDefault();
+      nextLevel();
+    });
+
+    $('input#gold-up').on('click', function (e) {
+      e.preventDefault();
+      updateGold(+1);
+    });
+
+    $('input#gold-down').on('click', function (e) {
+      e.preventDefault();
+      updateGold(-1);
+    });
+
+    $.each(['str', 'int', 'agl'], function (_, attribute) {
+      $('input#upgrade-'+attribute).on('click', function (e) {
+        e.preventDefault();
+        upgradeCharacter(attribute);
+      });
+    });
+
+    $('input#exhaust-room').on('click', function (e) {
+      e.preventDefault();
+      $('.room.selected').addClass('exhausted');
+    });
+
+    $('input#discard-power-play').on('click', function (e) {
+      e.preventDefault();
+      $('.power-play-area .card').appendTo('.discard');
+    });
+
+    $('input#rotate-left').on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      rotateSelectedCard(-1);
+    });
+
+    $('input#rotate-right').on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      rotateSelectedCard(+1);
+    });
+
+    $('input#reveal').on('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      $('.card.selected').removeClass('face-down');
+    });
+  };
+
+  if (localStorage.game) {
+    loadGame();
+  } else {
+    startGame();
+  }
+  setupEventHandlers();
+  setupGameSaveCallback();
 });
