@@ -1,4 +1,6 @@
 html {
+  margin: 0px;
+  padding: 0px;
 }
 
 body {
@@ -8,13 +10,14 @@ body {
   background: lightblue;
   position: relative;
   user-select: none;
-  font-variant: small-caps;
   font-family: "Open Sans", sans-serif;
 }
 
 h1 {
   font-family: "Copperplate", sans-serif;
+  font-variant: small-caps;
   margin-left: 1em;
+  margin-top: 0px;
 }
 
 a {
@@ -30,6 +33,7 @@ a:visited {
 }
 
 header {
+  padding-top: 16px;
 }
 
 footer {
@@ -910,8 +914,9 @@ input[type=button]:active {
 }
 
 #about {
+  position: relative;
   display: none;
-  font-size: 1.1em;
+  font-size: 1.2em;
   padding-left: 1em;
   margin-bottom: 1ex;
   padding: 10px;
