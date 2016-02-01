@@ -1,5 +1,8 @@
 $(function () {
 
+  // save for new game
+  var rawHTML = $('#game').html();
+
   var game, cards, stacks, playArea;
 
   var draggable;
@@ -174,11 +177,7 @@ $(function () {
     }
   };
 
-  var startGame = function () {
-    updateGameSelectors();
-
-    game.attr('data-level', 0);
-
+  var resetGame = function () {
     // reset gold
     var goldStack = $('.stack.gold');
     goldStack.attr('data-gold-tens', '');
@@ -200,28 +199,50 @@ $(function () {
 
     // put all the character cards back in place
     $('.card.character').appendTo('.stack.characters');
-    shuffle($('.stack.characters'));
-    $('.card.character:first').appendTo('.stack.player-character');
 
-    var powerStack = $('.stack.powers');
     // put all the power cards back in place
+    var powerStack = $('.stack.powers');
     $('.card.power').each(function (_, power) {
       moveCardToStack($(power), powerStack);
     })
-    shuffle(powerStack);
-
-    var powers = powerStack.children('.card.power');
-    var handStacks = $('.player-hand').children();
-    for (var i=0; i < 9; i++) {
-      moveCardToStack(powers.eq(i), handStacks.eq(i));
-    }
 
     // hide the amulet
     $('.amulet').appendTo('.unused-random');
 
     // remove extra HP
     $('.stack.extra-hp').attr('data-limit', 0);
+  };
 
+  var newGame = function () {
+    // remove any previously set event handlers
+    removeEventHandlers();
+
+    // reset to the raw html so we get any updates
+    game.html(rawHTML);
+
+    updateGameSelectors();
+    setupEventHandlers();
+
+    potentialRoomDrops = [];
+
+    game.attr('data-level', 0);
+
+    // shuffle and select a character
+    shuffle($('.stack.characters'));
+    $('.card.character:first').appendTo('.stack.player-character');
+
+    // shuffle the power stack
+    var powerStack = $('.stack.powers');
+    shuffle(powerStack);
+
+    // draw 9 cards for the player's hand
+    var powers = powerStack.children('.card.power');
+    var handStacks = $('.player-hand').children();
+    for (var i=0; i < 9; i++) {
+      moveCardToStack(powers.eq(i), handStacks.eq(i));
+    }
+
+    // set up the level
     nextLevel();
   };
 
@@ -296,6 +317,7 @@ $(function () {
     $('#game').attr('data-level', localStorage.gameLevel);
     updateGameSelectors();
     updatePotentialRoomDrops();
+    setupEventHandlers();
   };
 
   var setupEventHandlers = function () {
@@ -430,24 +452,6 @@ $(function () {
       touchStartTime = null;
     });
 
-    // Key Handlers
-
-    GameKeys.registerKeyDownHandler('left', function () {
-      rotateSelectedCard(-1);
-    });
-
-    GameKeys.registerKeyDownHandler('right', function () {
-      rotateSelectedCard(+1);
-    });
-
-    GameKeys.registerKeyDownHandler('up', function () {
-      updateGold(+1);
-    });
-
-    GameKeys.registerKeyDownHandler('down', function () {
-      updateGold(-1);
-    });
-
     // Custom stack card-drop events
 
     $('.player-character').on('card-drop', function (e, card) {
@@ -475,18 +479,6 @@ $(function () {
       $('.stack.discard .card.power').appendTo('.stack.powers');
       // shuffle
       shuffle($('.stack.powers'));
-    });
-
-    $('input#new-game').on('click', function (e) {
-      e.preventDefault();
-      if (confirm('Start new Game?')) {
-        startGame();
-      }
-    });
-
-    $('input#next-level').on('click', function (e) {
-      e.preventDefault();
-      nextLevel();
     });
 
     $('input#gold-up').on('click', function (e) {
@@ -535,11 +527,51 @@ $(function () {
     });
   };
 
+  var removeEventHandlers = function () {
+    game.find('input,card,stack').off();
+    game.off();
+  };
+
+  // set up event handlers that are not tied to the
+  // game field, so we shouldn't apply them more than once.
+  var setupNonGameElementEventHandlers = function () {
+    // Key Handlers
+
+    GameKeys.registerKeyDownHandler('left', function () {
+      rotateSelectedCard(-1);
+    });
+
+    GameKeys.registerKeyDownHandler('right', function () {
+      rotateSelectedCard(+1);
+    });
+
+    GameKeys.registerKeyDownHandler('up', function () {
+      updateGold(+1);
+    });
+
+    GameKeys.registerKeyDownHandler('down', function () {
+      updateGold(-1);
+    });
+
+    $('input#new-game').on('click', function (e) {
+      e.preventDefault();
+      if (confirm('Start new Game?')) {
+        newGame();
+      }
+    });
+
+    $('input#next-level').on('click', function (e) {
+      e.preventDefault();
+      nextLevel();
+    });
+  };
+
   if (localStorage.game) {
     loadGame();
   } else {
-    startGame();
+    newGame();
   }
-  setupEventHandlers();
+
+  setupNonGameElementEventHandlers();
   setupGameSaveCallback();
 });
