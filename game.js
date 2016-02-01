@@ -177,42 +177,6 @@ $(function () {
     }
   };
 
-  var resetGame = function () {
-    // reset gold
-    var goldStack = $('.stack.gold');
-    goldStack.attr('data-gold-tens', '');
-    goldStack.attr('data-gold-ones', 0);
-
-    // reset fruit
-    $('.card.fruits').removeClass('rot-90 rot-180').addClass('rot-270');
-
-    // reset arrows
-    $('.card.arrows')
-      .removeClass('rot-90 rot-180 rot-270')
-      .appendTo('.inventory.other');
-
-    // reset poison
-    $('.card.poison').appendTo('.inventory.other');
-
-    // reset the upgrade cards
-    $('.card.upgrade').attr('data-upgrade', 0).appendTo('.unused-random');
-
-    // put all the character cards back in place
-    $('.card.character').appendTo('.stack.characters');
-
-    // put all the power cards back in place
-    var powerStack = $('.stack.powers');
-    $('.card.power').each(function (_, power) {
-      moveCardToStack($(power), powerStack);
-    })
-
-    // hide the amulet
-    $('.amulet').appendTo('.unused-random');
-
-    // remove extra HP
-    $('.stack.extra-hp').attr('data-limit', 0);
-  };
-
   var newGame = function () {
     // remove any previously set event handlers
     removeEventHandlers();
