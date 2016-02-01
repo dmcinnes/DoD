@@ -528,6 +528,19 @@ $(function () {
       e.preventDefault();
       nextLevel();
     });
+
+    $('#about-link').on('click', function (e) {
+      e.preventDefault();
+      var about = $('#about');
+      var aboutLink = $(this);
+      about.toggle(200, function () {
+        if (about.is(':visible')) {
+          aboutLink.text('Hide About');
+        } else {
+          aboutLink.text('About');
+        }
+      });
+    });
   };
 
   if (localStorage.game) {

@@ -8,6 +8,28 @@ body {
   background: lightblue;
   position: relative;
   user-select: none;
+  font-variant: small-caps;
+  font-family: "Open Sans", sans-serif;
+}
+
+h1 {
+  font-family: "Copperplate", sans-serif;
+  margin-left: 1em;
+}
+
+a {
+  color: #181;
+}
+
+a:hover {
+  color: #5b5;
+}
+
+a:visited {
+  color: #181;
+}
+
+header {
 }
 
 footer {
@@ -877,4 +899,21 @@ input[type=button]:active {
 
 #rotate-left {
   transform: rotateY(180deg) rotate(-90deg);
+}
+
+#new-game {
+  margin-left: 2em;
+}
+
+#about-link {
+  margin-left: 2em;
+}
+
+#about {
+  display: none;
+  font-size: 1.1em;
+  padding-left: 1em;
+  margin-bottom: 1ex;
+  padding: 10px;
+  background-color: #9bc2cf;
 }
