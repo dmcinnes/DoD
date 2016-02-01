@@ -498,7 +498,10 @@ $(function () {
 
     $('input#discard-power-play').on('click', function (e) {
       e.preventDefault();
-      $('.power-play-area .card').appendTo('.discard');
+      var discard = $('.discard');
+      $('.power-play-area .card').each(function(_, card) {
+        moveCardToStack($(card), discard);
+      });
     });
 
     $('input#rotate-left').on('click', function (e) {
