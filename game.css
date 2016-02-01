@@ -870,3 +870,11 @@ input[type=button]:active {
 #game[data-level='8'] .monster-frost {
   transform: translate(320px, 16px) rotate( 90deg );
 }
+
+#rotate-right {
+  transform: rotate(-90deg);
+}
+
+#rotate-left {
+  transform: rotateY(180deg) rotate(-90deg);
+}
