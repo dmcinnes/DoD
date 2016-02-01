@@ -470,7 +470,9 @@ $(function () {
 
     $('input#new-game').on('click', function (e) {
       e.preventDefault();
-      startGame();
+      if (confirm('Start new Game?')) {
+        startGame();
+      }
     });
 
     $('input#next-level').on('click', function (e) {
