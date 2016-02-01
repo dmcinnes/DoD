@@ -286,6 +286,7 @@ input[type=button]:active {
 }
 
 .card {
+  transform: translateZ(0);
   transform-style: preserve-3d;
   display: inline-block;
   position: relative;
@@ -294,6 +295,7 @@ input[type=button]:active {
   height: 110px;
   box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
   border-radius: 9px;
+  transition-property: width, height, top, left, margin-top, margin-left;
   transition: 0.05s ease-out;
   z-index: 0;
   cursor: pointer;
@@ -315,6 +317,7 @@ input[type=button]:active {
 }
 
 .card.selected {
+  -webkit-transform: translateZ(0);
   position: fixed !important;
   width: 390px;
   height: 550px;
@@ -322,6 +325,7 @@ input[type=button]:active {
   left: 50% !important;
   margin-left: -195px !important;
   margin-top: -275px !important;
+  transition-property: width, height, top, left, margin-top, margin-left;
   transition: 0.10s ease-out;
   border-radius: 45px;
   z-index: 100 !important;
