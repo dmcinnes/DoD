@@ -179,6 +179,25 @@ $(function () {
 
     game.attr('data-level', 0);
 
+    // reset gold
+    var goldStack = $('.stack.gold');
+    goldStack.attr('data-gold-tens', '');
+    goldStack.attr('data-gold-ones', 0);
+
+    // reset fruit
+    $('.card.fruits').removeClass('rot-90 rot-180').addClass('rot-270');
+
+    // reset arrows
+    $('.card.arrows')
+      .removeClass('rot-90 rot-180 rot-270')
+      .appendTo('.inventory.other');
+
+    // reset poison
+    $('.card.poison').appendTo('.inventory.other');
+
+    // reset the upgrade cards
+    $('.card.upgrade').attr('data-upgrade', 0).appendTo('.unused-random');
+
     // hide the amulet
     $('.amulet').appendTo('.unused-random');
 
@@ -187,11 +206,14 @@ $(function () {
     shuffle($('.stack.characters'));
     $('.card.character:first').appendTo('.stack.player-character');
 
+    var powerStack = $('.stack.powers');
     // put all the power cards back in place
-    $('.card.power').appendTo('.stack.powers');
-    shuffle($('.stack.powers'));
+    $('.card.power').each(function (_, power) {
+      moveCardToStack($(power), powerStack);
+    })
+    shuffle(powerStack);
 
-    var powers = $('.stack.powers').children('.card.power');
+    var powers = powerStack.children('.card.power');
     var handStacks = $('.player-hand').children();
     for (var i=0; i < 9; i++) {
       moveCardToStack(powers.eq(i), handStacks.eq(i));
@@ -444,6 +466,11 @@ $(function () {
       $('.stack.discard .card.power').appendTo('.stack.powers');
       // shuffle
       shuffle($('.stack.powers'));
+    });
+
+    $('input#new-game').on('click', function (e) {
+      e.preventDefault();
+      startGame();
     });
 
     $('input#next-level').on('click', function (e) {
