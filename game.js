@@ -400,13 +400,13 @@ $(function () {
     var touchTarget;
     var touchStartTime;
 
-    game.on('touchstart', function (event) {
+    game.on('touchstart', '.card', function (event) {
       var originalEvent = event.originalEvent;
       touchTarget = originalEvent.target;
       touchStartTime = originalEvent.timeStamp;
     });
 
-    game.on('touchend', function (event) {
+    game.on('touchend', '.card', function (event) {
       var originalEvent = event.originalEvent;
       if (originalEvent.target === touchTarget &&
           originalEvent.timeStamp - touchStartTime < 600) { // millis
