@@ -25,7 +25,7 @@ $(function () {
   };
 
   var stackLimitNotReached = function (stack) {
-    var limit = stack.data('limit');
+    var limit = stack.attr('data-limit');
     return (limit === undefined || parseInt(limit, 10) > 0);
   };
 
@@ -150,15 +150,15 @@ $(function () {
 
   var moveCardToStack = function (card, stack) {
     if (stackLimitNotReached(stack)) {
-      var limit = stack.data('limit');
+      var limit = stack.attr('data-limit');
       if (limit !== undefined) {
-        stack.data('limit', parseInt(limit, 10) - 1);
+        stack.attr('data-limit', parseInt(limit, 10) - 1);
       }
 
       var fromStack = card.closest('.stack');
-      var fromLimit = fromStack.data('limit');
+      var fromLimit = fromStack.attr('data-limit');
       if (fromLimit !== undefined) {
-        fromStack.data('limit', parseInt(fromLimit, 10) + 1);
+        fromStack.attr('data-limit', parseInt(fromLimit, 10) + 1);
       }
 
       card.detach();
@@ -198,9 +198,6 @@ $(function () {
     // reset the upgrade cards
     $('.card.upgrade').attr('data-upgrade', 0).appendTo('.unused-random');
 
-    // hide the amulet
-    $('.amulet').appendTo('.unused-random');
-
     // put all the character cards back in place
     $('.card.character').appendTo('.stack.characters');
     shuffle($('.stack.characters'));
@@ -218,6 +215,12 @@ $(function () {
     for (var i=0; i < 9; i++) {
       moveCardToStack(powers.eq(i), handStacks.eq(i));
     }
+
+    // hide the amulet
+    $('.amulet').appendTo('.unused-random');
+
+    // remove extra HP
+    $('.stack.extra-hp').attr('data-limit', 0);
 
     nextLevel();
   };
@@ -330,7 +333,6 @@ $(function () {
     });
     droppableStacks.on('dragenter', function (event) {
       var stack = $(this);
-      var limit = stack.data('limit');
       if (stackLimitNotReached(stack)) {
         stack.addClass('stack-hover');
       }
@@ -447,6 +449,13 @@ $(function () {
     });
 
     // Custom stack card-drop events
+
+    $('.player-character').on('card-drop', function (e, card) {
+      if (card.hasClass('amulet')) {
+        // amulet gives you an extra HP
+        $('.stack.extra-hp').attr('data-limit', 1);
+      }
+    });
 
     $('.inventory').on('card-drop', function (e, card) {
       if (card.hasClass('power')) {
