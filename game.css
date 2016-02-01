@@ -922,3 +922,32 @@ input[type=button]:active {
   padding: 10px;
   background-color: #9bc2cf;
 }
+
+#token {
+  cursor: pointer;
+  position: absolute;
+  top: 47px;
+  left: 32px;
+  background: darkred;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  text-align: center;
+}
+#token:before, #token:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  pointer-events: none;
+}
+#token:before {
+  transform: rotate(30deg);
+  background: red;
+}
+#token:after {
+  transform: rotate(60deg);
+  background: #a00;
+}

@@ -3,7 +3,7 @@ $(function () {
   // save for new game
   var rawHTML = $('#game').html();
 
-  var game, cards, stacks, playArea;
+  var game, cards, stacks, playArea, token;
 
   var draggable;
   var draggableGrabPos = {};
@@ -20,16 +20,51 @@ $(function () {
     cards    = game.find('.card');
     stacks   = game.find('.stack');
     playArea = game.find('.play-area');
+    token    = $('#token');
 
     // set all non misc cards to draggable
     cards.not('.misc').attr('draggable', 'true');
     // fruits, arrows, poison and amulet are also draggable
     cards.filter('.fruits,.arrows,.poison,.amulet').attr('draggable', 'true');
+    // token is also draggable
+    token.attr('draggable', 'true');
   };
 
   var stackLimitNotReached = function (stack) {
     var limit = stack.attr('data-limit');
     return (limit === undefined || parseInt(limit, 10) > 0);
+  };
+
+  var dropRoom = function(room, x, y) {
+    var card = room.detach();
+    // some magic numbers that look right on an iPad drop
+    var cardX = draggableGrabPos.x || 39;
+    var cardY = draggableGrabPos.y || 55;
+    console.log(x, y, cardX, cardY);
+    var x = x - cardX;
+    var y = y - cardY;
+    if (potentialRoomDrops.length > 0) {
+      // find the closest
+      var dist = Number.MAX_VALUE;
+      var dropx = x;
+      var dropy = y;
+      for (var i=0; i < potentialRoomDrops.length; i++) {
+        var drop = potentialRoomDrops[i];
+        var left = x - drop.left;
+        var top  = y - drop.top;
+        var testDist = Math.sqrt(left*left + top*top);
+        if (testDist < dist) {
+          dist = testDist;
+          dropx = drop.left;
+          dropy = drop.top;
+        }
+      }
+      x = dropx;
+      y = dropy;
+    }
+    card.css({left: x, top: y});
+    playArea.append(card);
+    updatePotentialRoomDrops();
   };
 
   var updatePotentialRoomDrops = function () {
@@ -182,7 +217,7 @@ $(function () {
     removeEventHandlers();
 
     // reset to the raw html so we get any updates
-    game.html(rawHTML);
+    $('#game').html(rawHTML);
 
     updateGameSelectors();
     setupEventHandlers();
@@ -230,12 +265,17 @@ $(function () {
   };
 
   var nextLevel = function () {
+    // increment the level number
     var level = $('#game').attr('data-level');
     level++;
     if (level > 8) {
       return;
     }
     $('#game').attr('data-level', level);
+
+    // move the token back to the play area
+    $('#token').appendTo('.play-area');
+
     var unusedRooms = $('.unused-rooms');
     var roomStack = $('.stack.rooms');
     // move all rooms back to the unused rooms pile and shuffle
@@ -288,7 +328,8 @@ $(function () {
 
     // card drag handling
 
-    cards.on('dragstart', function (event) {
+    cards.add(token).on('dragstart', function (event) {
+      event.stopPropagation();
       draggable = $(this);
       draggable.addClass('being-dragged');
       game.addClass('drag-in-progress');
@@ -319,7 +360,7 @@ $(function () {
     });
     droppableStacks.on('dragenter', function (event) {
       var stack = $(this);
-      if (stackLimitNotReached(stack)) {
+      if (draggable[0].id !== 'token' && stackLimitNotReached(stack)) {
         stack.addClass('stack-hover');
       }
     });
@@ -328,18 +369,20 @@ $(function () {
     });
     droppableStacks.on('drop', function (event) {
       event.preventDefault();
-      var stack = $(this);
-      setTimeout(function () {
-        moveCardToStack(draggable, stack);
-        draggable = null;
-      }, 0);
+      if (draggable[0].id !== 'token') {
+        var stack = $(this);
+        setTimeout(function () {
+          moveCardToStack(draggable, stack);
+          draggable = null;
+        }, 0);
+      }
     });
 
     // Room Play Area drag/drop
 
     playArea.on('dragover', function (event) {
       event.preventDefault();
-      if (draggable.is('.room')) {
+      if (draggable.is('.room,#token')) {
         event.originalEvent.dataTransfer.dropEffect = 'move';
       }
     });
@@ -347,36 +390,22 @@ $(function () {
       event.preventDefault();
       if (draggable.is('.room')) {
         setTimeout(function () {
-          var card = draggable.detach();
-          var originalEvent = event.originalEvent;
-          // some magic numbers that look right on an iPad drop
-          var cardX = draggableGrabPos.x || 39;
-          var cardY = draggableGrabPos.y || 55;
-          var x = originalEvent.offsetX - cardX;
-          var y = originalEvent.offsetY - cardY;
-          if (potentialRoomDrops.length > 0) {
-            // find the closest
-            var dist = Number.MAX_VALUE;
-            var dropx = x;
-            var dropy = y;
-            for (var i=0; i < potentialRoomDrops.length; i++) {
-              var drop = potentialRoomDrops[i];
-              var left = x - drop.left;
-              var top  = y - drop.top;
-              var testDist = Math.sqrt(left*left + top*top);
-              if (testDist < dist) {
-                dist = testDist;
-                dropx = drop.left;
-                dropy = drop.top;
-              }
-            }
-            x = dropx;
-            y = dropy;
-          }
-          card.css({left: x, top: y});
-          playArea.append(card);
+          var x = event.originalEvent.offsetX;
+          var y = event.originalEvent.offsetY;
+          dropRoom(draggable, x, y);
           draggable = null;
-          updatePotentialRoomDrops();
+        }, 0);
+      }
+    });
+
+    // Player token drop
+
+    playArea.on('drop', '.room', function (event) {
+      event.stopPropagation();
+      if (draggable[0].id === 'token') {
+        setTimeout(function () {
+          token.appendTo($(event.target).closest('.room'));
+          draggable = null;
         }, 0);
       }
     });
@@ -492,8 +521,8 @@ $(function () {
   };
 
   var removeEventHandlers = function () {
-    game.find('input,card,stack').off();
-    game.off();
+    $('#game').find('input,card,stack,#token').off();
+    $('#game').off();
   };
 
   // set up event handlers that are not tied to the
