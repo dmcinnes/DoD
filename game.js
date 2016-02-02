@@ -429,16 +429,16 @@ $(function () {
     var touchTarget;
     var touchStartTime;
 
-    game.on('touchstart', '.card', function (event) {
+    game.on('touchstart', '.card,#game', function (event) {
       var originalEvent = event.originalEvent;
       touchTarget = originalEvent.target;
       touchStartTime = originalEvent.timeStamp;
     });
 
-    game.on('touchend', '.card', function (event) {
+    game.on('touchend', '.card,#game', function (event) {
       var originalEvent = event.originalEvent;
       if (originalEvent.target === touchTarget &&
-          originalEvent.timeStamp - touchStartTime < 600) { // millis
+          originalEvent.timeStamp - touchStartTime < 200) { // millis
         $(touchTarget).trigger('click');
       }
       touchTarget = null;
