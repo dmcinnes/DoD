@@ -36,17 +36,6 @@ header {
   padding-top: 16px;
 }
 
-footer {
-  position: absolute;
-  height: 50px;
-  width: 100%;
-  bottom: 0px;
-  left: 0px;
-  clear: both;
-  padding: 10px;
-  background: lightblue;
-}
-
 input[type=button] {
   -webkit-appearance: none;
   font-size: 0.8em;
