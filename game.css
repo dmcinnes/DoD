@@ -179,20 +179,21 @@ input[type=button]:active {
   top: 50%;
   left: -40px;
   font-weight: bold;
-  font-size: 1.3em;
+  font-size: 3em;
 }
 
 .stack.inventory .select-controls #rotate-right {
   top: 50%;
   right: -40px;
   font-weight: bold;
-  font-size: 1.3em;
+  font-size: 3em;
 }
 
 .stack.inventory .select-controls #reveal {
   left: 50%;
   bottom: 20px;
   transform: translate(-50%, -50%);
+  font-size: 2em;
 }
 
 .stack.rooms {
@@ -288,16 +289,16 @@ input[type=button]:active {
 }
 
 .player-character .select-controls #upgrade-str {
-  top: 150px;
-  left: -110px;
+  top: 145px;
+  left: -180px;
 }
 .player-character .select-controls #upgrade-int {
-  top: 222px;
-  left: -130px;
+  top: 217px;
+  left: -212px;
 }
 .player-character .select-controls #upgrade-agl {
-  top: 294px;
-  left: -100px;
+  top: 289px;
+  left: -158px;
 }
 
 .card {
@@ -355,7 +356,7 @@ input[type=button]:active {
   display: none;
 }
 .select-controls input {
-  font-size: 1.0em;
+  font-size: 1.2em;
   display: block;
   position: absolute;
   top: auto;
@@ -593,6 +594,7 @@ input[type=button]:active {
   top: auto;
   left: auto;
   transform: none;
+  font-size: 1.3em;
 }
 
 .stack.gold:hover #gold-up {
