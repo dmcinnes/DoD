@@ -42,7 +42,8 @@ $(function () {
     var cardY = draggableGrabPos.y || 55;
     var x = x - cardX;
     var y = y - cardY;
-    if (potentialRoomDrops.length > 0) {
+    if (potentialRoomDrops.length > 0 &&
+        playArea.children('.room').size() > 0) {
       // find the closest
       var dist = Number.MAX_VALUE;
       var dropx = x;
@@ -68,7 +69,7 @@ $(function () {
 
   var updatePotentialRoomDrops = function () {
     potentialRoomDrops = [];
-    var rooms = playArea.find('.room');
+    var rooms = playArea.children('.room');
     if (rooms.length == 0) {
       return;
     }
