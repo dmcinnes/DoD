@@ -89,12 +89,21 @@ input[type=button]:active {
   margin-bottom: 20px;
 }
 
-.play-area {
+.play-area-mask {
   position: relative;
-  box-sizing: border-box;
   height: 600px;
   left: 6px;
   right: 0px;
+  border-radius: 7px;
+  overflow: auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
+}
+
+.play-area {
+  position: absolute;
+  width: 800px;
+  height: 800px;
   background-color: #9bc2cf;
 }
 
@@ -922,7 +931,6 @@ input[type=button]:active {
   background: darkred;
   width: 20px;
   height: 20px;
-  position: relative;
   text-align: center;
 }
 #token:before, #token:after {
@@ -941,4 +949,10 @@ input[type=button]:active {
 #token:after {
   transform: rotate(60deg);
   background: #a00;
+}
+
+section.level-section > #token {
+  top: 70px;
+  left: auto;
+  right: 14px;
 }

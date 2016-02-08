@@ -273,8 +273,8 @@ $(function () {
     }
     $('#game').attr('data-level', level);
 
-    // move the token back to the play area
-    $('#token').appendTo('.play-area');
+    // move the token back to the level section
+    $('#token').appendTo('.level-section');
 
     var unusedRooms = $('.unused-rooms');
     var roomStack = $('.stack.rooms');
