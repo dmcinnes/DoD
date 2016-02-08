@@ -298,6 +298,9 @@ $(function () {
     }
     shuffle(roomStack);
     potentialRoomDrops = [];
+
+    // center the play area
+    $('.play-area-mask').scrollLeft(100).scrollTop(100);
   };
 
   var upgradeCharacter = function (attribute) {
