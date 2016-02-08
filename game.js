@@ -40,7 +40,6 @@ $(function () {
     // some magic numbers that look right on an iPad drop
     var cardX = draggableGrabPos.x || 39;
     var cardY = draggableGrabPos.y || 55;
-    console.log(x, y, cardX, cardY);
     var x = x - cardX;
     var y = y - cardY;
     if (potentialRoomDrops.length > 0) {
@@ -311,7 +310,6 @@ $(function () {
   };
 
   var saveGame = function () {
-    console.log('saveGame');
     localStorage.game = game.html();
     localStorage.gameLevel = game.attr('data-level');
   };
