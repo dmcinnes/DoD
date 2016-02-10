@@ -475,7 +475,7 @@ $(function () {
     });
 
     $('.discard').on('card-drop', function (e, card) {
-      card.removeClass('face-down rot-90 rot-180 rot-270');
+      card.removeClass('face-down rot-90 rot-180 rot-270 selected');
     });
 
     // Button Clicks
@@ -519,21 +519,29 @@ $(function () {
     });
 
     $('input#rotate-left').on('click', function (e) {
-      e.preventDefault();
       e.stopPropagation();
       rotateSelectedCard(-1);
     });
 
     $('input#rotate-right').on('click', function (e) {
-      e.preventDefault();
       e.stopPropagation();
       rotateSelectedCard(+1);
     });
 
     $('input#reveal').on('click', function (e) {
-      e.preventDefault();
       e.stopPropagation();
       $('.card.selected').removeClass('face-down');
+    });
+
+    $('input#discard-inv').on('click', function (e) {
+      e.stopPropagation();
+      var card = $('.card.selected');
+      unselectCards();
+      if (card.hasClass('power')) {
+        moveCardToStack(card, $('.stack.discard'));
+      } else {
+        moveCardToStack(card, $('.stack.other'));
+      }
     });
   };
 

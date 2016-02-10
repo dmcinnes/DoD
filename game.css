@@ -200,7 +200,14 @@ input[type=button]:active {
 
 .stack.inventory .select-controls #reveal {
   left: 50%;
-  bottom: 20px;
+  bottom: 50px;
+  transform: translate(-50%, -50%);
+  font-size: 2em;
+}
+
+.stack.inventory .select-controls #discard-inv {
+  left: 50%;
+  bottom: 0px;
   transform: translate(-50%, -50%);
   font-size: 2em;
 }
