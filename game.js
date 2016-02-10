@@ -371,6 +371,9 @@ $(function () {
     });
     droppableStacks.on('drop', function (event) {
       event.preventDefault();
+      if (touchClick) { // last touch was a click
+        return;
+      }
       if (draggable[0].id !== 'token') {
         var stack = $(this);
         setTimeout(function () {
@@ -390,6 +393,9 @@ $(function () {
     });
     playArea.on('drop', function (event) {
       event.preventDefault();
+      if (touchClick) { // last touch was a click
+        return;
+      }
       if (draggable.is('.room')) {
         setTimeout(function () {
           var x = event.originalEvent.offsetX;
@@ -404,6 +410,9 @@ $(function () {
 
     playArea.on('drop', '.room', function (event) {
       event.stopPropagation();
+      if (touchClick) { // last touch was a click
+        return;
+      }
       if (draggable[0].id === 'token') {
         setTimeout(function () {
           token.appendTo($(event.target).closest('.room'));
@@ -430,8 +439,10 @@ $(function () {
 
     var touchTarget;
     var touchStartTime;
+    var touchClick = false; // was the last touch a click?
 
     game.on('touchstart', '.card,#game', function (event) {
+      touchClick = false; // reset touchClick
       var originalEvent = event.originalEvent;
       touchTarget = originalEvent.target;
       touchStartTime = originalEvent.timeStamp;
@@ -441,6 +452,7 @@ $(function () {
       var originalEvent = event.originalEvent;
       if (originalEvent.target === touchTarget &&
           originalEvent.timeStamp - touchStartTime < 200) { // millis
+        touchClick = true;
         $(touchTarget).trigger('click');
       }
       touchTarget = null;
